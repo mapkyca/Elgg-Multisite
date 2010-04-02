@@ -319,6 +319,17 @@
 	}
 	
 	/**
+	 * Count number of users.
+	 *
+	 */
+	function elggmulti_countusers()
+	{
+		$row = elggmulti_getdata_row('SELECT count(*) as count FROM users');
+		
+		return $row->count;
+	}
+	
+	/**
 	 * Retrieve db settings.
 	 *
 	 * Retrieve a database setting based on the current multisite domain

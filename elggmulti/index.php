@@ -16,16 +16,23 @@
 		<?php include(dirname(__FILE__).'/multi/pages/titlebar.php'); ?>
 	</div>
 	<?php
-
-		$loggedinuser = $_SESSION['user'];
-	
-		if (!$loggedinuser)
+		if (elggmulti_countusers() > 0)
 		{
-			include(dirname(__FILE__).'/multi/pages/login.php');
+		
+			$loggedinuser = $_SESSION['user'];
+		
+			if (!$loggedinuser)
+			{
+				include(dirname(__FILE__).'/multi/pages/login.php');
+			}
+			else
+			{
+				include(dirname(__FILE__).'/multi/pages/mainform.php');
+			}
 		}
 		else
 		{
-			include(dirname(__FILE__).'/multi/pages/mainform.php');
+			include(dirname(__FILE__).'/multi/pages/firstuser.php');
 		}
 	?>
 	<div class="footer">
