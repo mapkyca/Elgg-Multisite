@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="elggmulti" default="local" basedir=".">
+	
+	<!-- Deployment settings -->
+	<property name="output_local" value="/home/icewing/public_html/elggmulti/" />
+	<property name="output_live" value="/tmp/elggmulti/" />
+	
+	<!-- Base Elgg package -->
+	<property name="elggversion" value="1.7" />
+	<property name="elggpackage" value="elgg/elgg-${elggversion}.zip" />
+	
+	<!-- Temporary directory -->
+	<property name="tmp" value="/tmp/" />
+	
+	<target name="build">
+	
+		<unzip src="${elggpackage}" dest="${tmp}elggmultibase/" overwrite="yes" />
+		
+		<mkdir dir="${output}docroot" />
+		<copy todir="${output}docroot/" overwrite="true">
+			<fileset dir="${tmp}elggmultibase/elgg-${elggversion}/" />
+		</copy>
+		
+		<copy todir="${output}" overwrite="true">
+			<fileset dir="elggmulti/">
+				<exclude name=".cache/**"/>
+				<exclude name=".settings/**"/>
+				<exclude name=".svn/**"/>
+				<exclude name=".project"/>
+			</fileset>
+		</copy>
+	
+	</target>
+	
+	<target name="local">
+		<antcall target="build">
+			<param name="output" value="${output_local}"/>
+			<param name="task" value="live"/>
+		</antcall>
+	</target>
+	
+	<target name="release">
+		<antcall target="build">
+			<param name="output" value="${output_live}docroot/"/>
+			<param name="task" value="live"/>
+		</antcall>
+		
+		<zip destfile="releases/elggmultisite-${DSTAMP}.zip" basedir="${output_live}" />
+	</target>
+
+</project>

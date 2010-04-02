@@ -1,0 +1,32 @@
+Elgg Multisite
+(c) Copyright Marcus Povey / UnofficialElgg.com 2010
+
+This is a version of Elgg which supports multiple sites on a single
+installation.
+
+It was created and copyrighted by:
+
+Marcus Povey <marcus@marcus-povey.co.uk>
+UnofficialElgg.com <info@unofficialelgg.com>
+
+INSTALLATION
+
+1) Unzip the package on your web server.
+
+2) Point your master domain at the contents of the docroot/ folder.
+
+3) Chmod 777 docroot/data - this is the default location for elgg multi domains.
+
+4) Install schema/multisite_mysql.sql
+
+5) Rename settings.example.php in docroot/elgg/engine/ to settings.php and configure:
+	
+		$CONFIG->multisite->dbuser = 'your username';
+		$CONFIG->multisite->dbpass = 'password';
+		$CONFIG->multisite->dbhost = 'host';
+
+	as appropriate.		
+
+6) Visit your master domain and configure your admin user
+
+7) Begin configuring your sites! 
