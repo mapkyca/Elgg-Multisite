@@ -296,10 +296,10 @@
 	/**
 	 * Set user password.
 	 *
-	 * @param unknown_type $username
-	 * @param unknown_type $password
-	 * @param unknown_type $password2
-	 * @return unknown
+	 * @param string $username
+	 * @param string $password
+	 * @param string $password2
+	 * @return bool
 	 */
 	function elggmulti_set_user_password($username, $password, $password2)
 	{
