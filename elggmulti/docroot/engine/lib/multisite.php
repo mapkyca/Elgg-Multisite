@@ -283,9 +283,9 @@
 			
 		$dblink = elggmulti_db_connect();
 
-		$username = mysql_real_escape_string($username);
-		$password = mysql_real_escape_string($password);
-		$salt = substr(md5(rand(), 0, 8));
+		$salt = substr(md5(rand()), 0, 8);
+		$username = mysql_real_escape_string(strtolower($username));
+		$password = md5(mysql_real_escape_string($password) . $salt);
 		
 		$result = elggmulti_execute_query("INSERT into users (username,password,salt) VALUES ('$username', '$password', '$salt')");	
 		$userid = mysql_insert_id($dblink);		
@@ -354,6 +354,16 @@
 			return $result;
 		
 		return false;
+	}
+	
+	function elggmulti_get_messages()
+	{
+		
+	}
+	
+	function elggmulti_set_message($message)
+	{
+		
 	}
 	
 	/**
