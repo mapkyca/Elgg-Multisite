@@ -1,1 +1,120 @@
 @CHARSET "UTF-8";
+
+
+
+
+
+div.page_body {
+	min-height: 400px;
+}
+
+div.login {
+	padding: 10px;
+}
+
+
+div.footer{
+	margin-top: 10px;
+	text-align: right;
+}
+
+
+
+
+
+/* ***************************************
+	GENERAL FORM ELEMENTS
+*************************************** */
+label {
+	font-weight: bold;
+	font-size: 120%;
+}
+input, select {
+	font: 120% Arial, Helvetica, sans-serif;
+	padding: 5px;
+	border: 1px solid #000;
+	color:#000;
+}
+textarea {
+	font: 120% Arial, Helvetica, sans-serif;
+	border: solid 1px #000;
+	padding: 5px;
+	color:#000;
+}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus {
+	border: solid 1px #000;
+	background: #efefef;
+	color:#000;
+}
+.submit_button {
+	font: 12px/100% Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #fff;
+	background:#000;
+	border: 1px solid #000;
+	width: auto;
+	height: 25px;
+	padding: 2px 6px 2px 6px;
+	margin:10px 0 10px 0;
+	cursor: pointer;
+}
+
+input[type="submit"] {
+	font: 12px/100% Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #000;
+	background:#fff;
+	border: 1px solid #000;
+	width: auto;
+	height: 25px;
+	padding: 2px 6px 2px 6px;
+	margin:10px 0 10px 0;
+	cursor: pointer;
+}
+
+.cancel_button {
+	font: 12px/100% Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #000;
+	background:#fff;
+	border: 1px solid #000;
+	width: auto;
+	height: 25px;
+	padding: 2px 6px 2px 6px;
+	margin:10px 0 10px 10px;
+	cursor: pointer;
+}
+.cancel_button:hover {
+	background: #000;
+	color: #fff;
+}
+
+.submit_button:hover, input[type="submit"]:hover {
+	background: #000;
+	color: #fff;
+}
+
+.input-text,
+.input-tags,
+.input-url,
+.input-email,
+.input-password,
+.input-number,
+.input-textarea {
+	width:98%;
+	background: #000;
+}
+
+.input-checkbox {
+	background: #fff;
+	border: 1px solid #000;
+}
+
+.input-textarea,
+.input-genre {
+	height: 200px;
+}
+
+input[type="image"] {
+	border-width: 0px;
+}

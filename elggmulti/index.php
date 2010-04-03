@@ -15,6 +15,7 @@
 	<div class="header">
 		<?php include(dirname(__FILE__).'/multi/pages/titlebar.php'); ?>
 	</div>
+	<div class="page_body">
 	<?php
 		if (elggmulti_countusers() > 0)
 		{
@@ -35,6 +36,7 @@
 			include(dirname(__FILE__).'/multi/pages/firstuser.php');
 		}
 	?>
+	</div>
 	<div class="footer">
 		<div class="copyright">ElggMultisite brought to you by <a href="http://www.unofficialelgg.com/" target="_blank">UnofficialElgg.com</a></div>
 	</div>
