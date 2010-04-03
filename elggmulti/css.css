@@ -13,6 +13,12 @@ body {
 
 div.page_body {
 	min-height: 400px;
+	padding-top:10px;
+	padding-bottom:10px;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 
 div.login, div.registeruser {
@@ -23,6 +29,10 @@ div.login, div.registeruser {
 	border: 1px solid #000;
 }
 
+div.titlebar {
+
+	font-size: 90px;
+}
 
 div.footer{
 	margin-top: 10px;

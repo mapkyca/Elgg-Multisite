@@ -2,5 +2,5 @@
 
 ?>
 <div class="titlebar">
-	<h1>Elgg Multisite</h1>
+	<h1>ElggMultisite</h1>
 </div>
