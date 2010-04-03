@@ -1,5 +1,12 @@
 @CHARSET "UTF-8";
-
+body {
+	text-align:justify;
+	margin:0 auto;
+	padding:0;
+	background-color: #000;
+	font: 80%/1.4  "Lucida Grande", Verdana, sans-serif;
+	color: #ffffff;
+}
 
 
 
@@ -8,8 +15,12 @@ div.page_body {
 	min-height: 400px;
 }
 
-div.login {
+div.login, div.registeruser {
 	padding: 10px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #000;
 }
 
 
@@ -53,7 +64,6 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus {
 	background:#000;
 	border: 1px solid #000;
 	width: auto;
-	height: 25px;
 	padding: 2px 6px 2px 6px;
 	margin:10px 0 10px 0;
 	cursor: pointer;
@@ -66,9 +76,9 @@ input[type="submit"] {
 	background:#fff;
 	border: 1px solid #000;
 	width: auto;
-	height: 25px;
 	padding: 2px 6px 2px 6px;
 	margin:10px 0 10px 0;
+	font-size:120%;
 	cursor: pointer;
 }
 
@@ -79,7 +89,7 @@ input[type="submit"] {
 	background:#fff;
 	border: 1px solid #000;
 	width: auto;
-	height: 25px;
+	font-size:120%;
 	padding: 2px 6px 2px 6px;
 	margin:10px 0 10px 10px;
 	cursor: pointer;
