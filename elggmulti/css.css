@@ -66,7 +66,7 @@ div.mainform div.form_menu {
 }
 
 
-div.domains {
+div.domains, div.domain_forms {
 	margin-left: 30px;
 	margin-right: 30px;
 }
