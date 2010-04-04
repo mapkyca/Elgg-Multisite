@@ -77,7 +77,7 @@ border:1px solid #E3E4E4;
 	padding: 5px;
 }
 
-div.domain_form {
+div.domain_form, div.domain_display {
 	padding:5px;
 	background-color: #fff;
 	border:1px solid #E3E4E4;
