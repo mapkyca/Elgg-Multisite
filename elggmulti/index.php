@@ -2,17 +2,32 @@
 	require_once(dirname(__FILE__) . '/multi/start.php');
 	
 	
-	session_start();
-	
 ?>
 <html>
 	<head>
 		<title>Elgg Multisite</title>
 		<link rel="stylesheet" href="css.css" type="text/css" />
+		<script type="text/javascript" language="javascript">
+		<!--
+			function showhide(id)
+			{
+				var e = document.getElementById(id);
+					
+				if(e.style.display == 'none') {
+					e.style.display = 'block';
+				} else {
+					e.style.display = 'none';
+				} 
+			}
+		// -->
+		</script> 
 	</head>
 	
 	<body>
 	<div class="header">
+	
+		<?php include(dirname(__FILE__).'/multi/pages/messages.php'); ?>
+	
 		<?php include(dirname(__FILE__).'/multi/pages/titlebar.php'); ?>
 	</div>
 	<div class="page_body">
@@ -38,7 +53,7 @@
 	?>
 	</div>
 	<div class="footer">
-		<div class="copyright">ElggMultisite brought to you by <a href="http://www.unofficialelgg.com/" target="_blank">UnofficialElgg.com</a></div>
+		<div class="copyright"><a href="http://www.unofficialelgg.com/wiki/ElggMultisite/">ElggMultisite</a> brought to you by <a href="http://www.unofficialelgg.com/" target="_blank">UnofficialElgg.com</a></div>
 	</div>
 	</body>
 </html>

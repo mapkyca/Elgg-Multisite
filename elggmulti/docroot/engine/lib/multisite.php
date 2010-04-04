@@ -21,6 +21,7 @@
 		private $domain = "";
 		private $id;
 		
+		
 		public function __construct($url = '') 
 		{
 			if ($url) {
@@ -130,6 +131,19 @@
  			}
  		}
  		
+ 		
+ 		/**
+		 * Return available multisite domains.
+		 *
+		 * @return array
+		 */
+		public static function getDomainTypes() 
+		{
+			return array (
+				'MultisiteDomain' => 'Default Elgg domain',
+			);
+		}
+		
 	}
 	
 	/**
@@ -253,14 +267,29 @@
 	{
 		$username = mysql_real_escape_string($username);
 		$user = elggmulti_getdata_row("SELECT * FROM users WHERE username='$username' LIMIT 1");
-		
+	
 		if ($user)
 		{
-			if (strcmp($user->password, md5($username.$user->salt)) == 0)
+			if (strcmp($user->password, md5($password.$user->salt)) == 0) {
+
+				$_SESSION['user'] = $user;
+				
+				session_regenerate_id();
+			
 				return true;
+			}
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Log the current user out.
+	 *
+	 */
+	function elggmulti_logout()
+	{
+		unset ($_SESSION['user']); 
 	}
 	
 	/**
@@ -358,12 +387,25 @@
 	
 	function elggmulti_get_messages()
 	{
+		if ((isset($_SESSION['_EM_MESSAGES'])) && (is_array($_SESSION['_EM_MESSAGES']))) 
+		{
+			$messages = $_SESSION['_EM_MESSAGES'];
+			$_SESSION['_EM_MESSAGES'] = null;
+			
+			return $messages;
+		}
 		
+		return false;
 	}
 	
 	function elggmulti_set_message($message)
 	{
+		if (!is_array($_SESSION['_EM_MESSAGES']))
+			$_SESSION['_EM_MESSAGES'] = array();
+			
+		$_SESSION['_EM_MESSAGES'][] = $message;
 		
+		return true;
 	}
 	
 	/**
