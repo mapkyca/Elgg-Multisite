@@ -4,26 +4,27 @@
 	$class = $_REQUEST['class'];
 	$url = $_REQUEST['domain'];
 
-	if ($url)
-	{
-		switch ($class)
+	if ($_SESSION['user']) {
+		if ($url)
 		{
-			case 'MultisiteDomain' :
-			default:
-				if ($url)
-				{
-					if (strpos($url, 'http')!==true)
-						$url = 'http://' . $url;
-						
-					$domain = new MultisiteDomain($url);
-					if ($domain->save())
-						elggmulti_set_message('New domain created');
-				}
+			switch ($class)
+			{
+				case 'MultisiteDomain' :
+				default:
+					if ($url)
+					{
+						if (strpos($url, 'http')!==true)
+							$url = 'http://' . $url;
+							
+						$domain = new MultisiteDomain($url);
+						if ($domain->save())
+							elggmulti_set_message('New domain created');
+					}
+			}
 		}
+		else
+			elggmulti_set_message('You need to provide a valid domain');
 	}
-	else
-		elggmulti_set_message('You need to provide a valid domain');
-	
 	
 	header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>
