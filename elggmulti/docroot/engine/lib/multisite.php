@@ -60,8 +60,9 @@
  		 */
 		public function isSiteAccessible() { return true; }
 		
-		public function setDomain($url) { $this->url = $url; }
-		public function getDomain() {return $this->url; }
+		public function setDomain($url) { $this->domain = $url; }
+		public function getDomain() {return $this->domain; }
+		public function getID() {return $this->id; }
  		
 		/**
 		 * Save object to database.
@@ -72,12 +73,17 @@
  			$url = mysql_real_escape_string($this->getDomain());
  			
  			$dblink = elggmulti_db_connect();
- 			$result = elggmulti_execute_query("INSERT into domains (domain, class) VALUES ('$url', '$class')");
+ 			if (!$this->id) {
+ 				$result = elggmulti_execute_query("INSERT into domains (domain, class) VALUES ('$url', '$class')");
+ 				$this->id = mysql_insert_id($dblink);
+ 			}
+ 			else
+ 				$result = elggmulti_execute_query("UPDATE domains set domain='$url', class='$class' WHERE id={$this->id}");
+ 		
  			if (!$result)
  				return false;
  				
- 			$this->id = mysql_insert_id($dblink);
- 				
+ 			
  			elggmulti_execute_query("DELETE from domains_metadata where domain_id='{$this->id}'");
  			
  			foreach ($this->__attributes as $key => $value)
@@ -110,7 +116,7 @@
  			$this->domain = $row->domain;
  			$this->id = $row->id;
  				
- 			$meta = elggmulti_getdata("SELECT * from domains_meta where domain_id = {$row->id}");
+ 			$meta = elggmulti_getdata("SELECT * from domains_metadata where domain_id = {$row->id}");
  			if ($meta)
  			{
  				foreach ($meta as $md)
@@ -249,7 +255,7 @@
 	 */
 	function elggmulti_getdata_row($query, $callback = '')
 	{
-		$result = elggmulti_getdata($query);
+		$result = elggmulti_getdata($query, $callback);
 		if ($result)
 			return $result[0];
 			

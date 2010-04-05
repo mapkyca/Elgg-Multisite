@@ -11,16 +11,18 @@
 		{
 			$label = $forms[get_class($domain)];
 			$url = $domain->getDomain();
+		
+			$d = strtolower(get_class($domain));
 		?>
 		<div class="domain">
-			<a href="#" onclick="showhide('add_<?php echo $domain; ?>');"><?php echo $label; ?> <?php echo $url; ?></a>
-			<div id="disp_<?php echo $domain; ?>" style="display: none;">
+			<a href="#" onclick="showhide('disp_<?php echo $domain->getID(); ?>');"><b><?php echo $url; ?></b> (<?php echo $label; ?>) </a>
+			<div id="disp_<?php echo $domain->getID(); ?>" style="display: none;">
 				<div class="domain_display">
 				<?php include(dirname(__FILE__)."/../objects/{$d}.php"); ?>
 				</div>
 			</div>
 			<div class="domain_strap">
-				Edit :: Delete
+				<a href="multi/actions/deletedomain.php?domain_id=<?php echo $domain->getID(); ?>">Delete</a>
 			</div>
 		</div>	
 		<?php

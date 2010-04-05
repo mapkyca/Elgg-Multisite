@@ -69,12 +69,14 @@ div.mainform div.form_menu {
 div.domains, div.domain_forms {
 	margin-left: 30px;
 	margin-right: 30px;
+	margin-bottom: 5px;
 }
 
 div.domain {
 	background-color:#F5F5F5;
 border:1px solid #E3E4E4;
 	padding: 5px;
+	margin-bottom:5px;
 }
 
 div.domain_form, div.domain_display {
@@ -224,7 +226,7 @@ input[type="submit"] {
 .input-password,
 .input-number,
 .input-textarea {
-	width:98%;
+	width:100%;
 }
 
 .input-checkbox {

@@ -3,23 +3,15 @@
 	
 	global $CONFIG;
 	
-	$class = $_REQUEST['class'];
+	$id = (int)$_REQUEST['domain_id'];
 	$url = $_REQUEST['domain'];
 	
 
 	if ($_SESSION['user']) {
 		if ($url)
 		{
-			$domain = false;
-			
-			switch ($class)
-			{
-				case 'MultisiteDomain' :
-				default:
-					if ($url)
-						$domain = new MultisiteDomain();
-			}
-			
+			$domain = elggmulti_getdata_row("SELECT * from domains WHERE id=$id limit 1", '__elggmulti_db_row');
+
 			if ($domain) {
 				
 				// Common url settings
@@ -44,7 +36,7 @@
 				
 				// Save
 				if ($domain->save())
-					elggmulti_set_message('New domain created');
+					elggmulti_set_message('Domain details updated');
 			}
 		}
 		else
