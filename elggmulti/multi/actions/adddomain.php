@@ -41,6 +41,18 @@
 				$domain->dbhost = $_REQUEST['dbhost'];
 				if (!$domain->dbhost)
 					$domain->dbhost=$CONFIG->multisite->dbhost;
+
+				$dbname = mysql_real_escape_string($domain->dbname);
+				$dbuser = mysql_real_escape_string($domain->dbuser);
+				$dbpass = mysql_real_escape_string($domain->dbpass);
+				$dbhost = mysql_real_escape_string($domain->dbhost);
+					
+				// Try and create the database using registered 
+				if (!elggmulti_execute_query("CREATE database $dbname"))
+					elggmulti_set_message("Could not create database $dbname@$dbhost, perhaps it already exists?");
+					
+				if (!elggmulti_execute_query("grant all on $dbname.* to `$dbuser`@`$dbhost` identified by '$dbpass'"))
+					elggmutli_set_message("Unable to grant access on $dbname@$dbhost, please do this manually or you will likely have problems");
 				
 				// Save
 				if ($domain->save())

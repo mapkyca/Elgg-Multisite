@@ -414,36 +414,4 @@
 		return true;
 	}
 	
-	/**
-	 * Register a new collection of database settings. 
-	 * 
-	 * @param $dbhost The host
-	 * @param $dbuser The user
-	 * @param $dbpass The password
-	 * @param $db The database
-	 * @param $dbprefix The prefix
-	 * @param $url Optional url to bind to
-	 * @param $linktype The type of link (lets you separate reads from writes)
-	 */
-	function elggmulti_add_database_details($dbhost, $dbuser, $dbpass, $dbname, $dbprefix, $url, $linktype = "readwrite")
-	{
-	/*	global $DB_SETTINGS;
-
-		if (!isset($DB_SETTINGS[$linktype]))
-			$DB_SETTINGS[$linktype] = array();
-
-		if (!isset($DB_SETTINGS[$linktype][$url]))
-			$DB_SETTINGS[$linktype][$url] = array();
-
-		$DB_SETTINGS[$linktype][$url]['dbhost'] = $dbhost;
-		$DB_SETTINGS[$linktype][$url]['dbuser'] = $dbuser;
-		$DB_SETTINGS[$linktype][$url]['dbpass'] = $dbpass;
-		$DB_SETTINGS[$linktype][$url]['dbprefix'] = $dbprefix;
-		$DB_SETTINGS[$linktype][$url]['dbname'] = $dbname;
-
-		return true;*/
-		
-		
-		
-	}
 ?>
