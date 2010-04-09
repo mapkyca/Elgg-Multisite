@@ -13,13 +13,17 @@ INSTALLATION
 
 1) Unzip the package on your web server.
 
-2) Point your master domain at the contents of the docroot/ folder.
+2) Point your master domain at the contents of the install location on your web server (e.g /var/elggmulti)
+	You will want to make sure that this location is behind some form of access restriction limiting it to only
+	your organisation as it will contain the data root of all elgg domains.
 
-3) Chmod 777 docroot/data - this is the default location for elgg multi domains.
+3) Point any sub domains to the contents of the docroot folder, eg (/var/elggmulti/docroot)
 
-4) Install schema/multisite_mysql.sql
+4) Chmod 777 docroot/data - this is the default location for elgg multi domains.
 
-5) Rename settings.example.php in docroot/elgg/engine/ to settings.php and configure:
+5) Install schema/multisite_mysql.sql
+
+6) Rename settings.example.php in docroot/elgg/engine/ to settings.php and configure:
 	
 		$CONFIG->multisite->dbuser = 'your username';
 		$CONFIG->multisite->dbpass = 'password';
@@ -27,6 +31,6 @@ INSTALLATION
 
 	as appropriate.		
 
-6) Visit your master domain and configure your admin user
+7) Visit your master domain and configure your admin user
 
-7) Begin configuring your sites! 
+8) Begin configuring your sites! 
