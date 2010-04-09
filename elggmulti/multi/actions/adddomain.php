@@ -27,8 +27,12 @@
 				
 				// Common db settings
 				$domain->dbname = $_REQUEST['dbname'];
-				if (!$domain->dbname)
-					$domain->dbname=$CONFIG->multisite->dbname;
+				if (!$domain->dbname) {
+					foreach (array('.',',',':','/','\\','\'','"','$','£','!','(',')','{','}') as $char)
+						$url = str_replace($char,'_', $url);
+					
+					$domain->dbname= $url;
+				}
 				
 				$domain->dbuser = $_REQUEST['dbuser'];
 				if (!$domain->dbuser)
@@ -52,7 +56,7 @@
 					elggmulti_set_message("Could not create database $dbname@$dbhost, perhaps it already exists?");
 					
 				if (!elggmulti_execute_query("grant all on $dbname.* to `$dbuser`@`$dbhost` identified by '$dbpass'"))
-					elggmutli_set_message("Unable to grant access on $dbname@$dbhost, please do this manually or you will likely have problems");
+					elggmulti_set_message("Unable to grant access on $dbname@$dbhost, please do this manually or you will likely have problems");
 				
 				// Save
 				if ($domain->save())
