@@ -63,6 +63,32 @@
 		public function setDomain($url) { $this->domain = $url; }
 		public function getDomain() {return $this->domain; }
 		public function getID() {return $this->id; }
+		
+		public function isDbInstalled()
+		{
+			$link = mysql_connect($this->dbhost, $this->dbuser, $this->dbpass, true);
+			mysql_select_db($this->dbname, $link);
+			
+			$result = mysql_query("SHOW tables like '{$this->dbprefix}%'", $link);
+			$result = mysql_fetch_object($result);
+			if ($result)
+				return true;
+				
+			return false;
+		}
+		
+		public function getDBVersion()
+		{
+			$link = mysql_connect($this->dbhost, $this->dbuser, $this->dbpass, true);
+			mysql_select_db($this->dbname, $link);
+			
+			$result = mysql_fetch_object(mysql_query("SELECT * FROM {$this->dbprefix}datalists WHERE name='version'"));
+		
+			if ($result)
+				(int)$result->value;
+				
+			return false;
+		}
  		
 		/**
 		 * Save object to database.
@@ -385,6 +411,7 @@
 			$url = $_SERVER['SERVER_NAME'];
 
 		$result = elggmulti_getdata_row("SELECT * from domains WHERE domain='$url' LIMIT 1", '__elggmulti_db_row');
+	
 		if ($result)
 			return $result;
 		

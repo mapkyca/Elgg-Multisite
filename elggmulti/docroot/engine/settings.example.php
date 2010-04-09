@@ -34,7 +34,7 @@
 	 * Currently split databases are not supported.
 	 */
 	$db_settings = elggmulti_get_db_settings();
-	
+	$CONFIG->dataroot = $db_settings->dataroot;
 	$CONFIG->dbuser = $db_settings->dbuser;
 	$CONFIG->dbpass = $db_settings->dbpass;
 	$CONFIG->dbname = $db_settings->dbname;

@@ -1,5 +1,8 @@
 <?php
+	global $version;
+		
 	$forms = MultisiteDomain::getDomainTypes();
+	
 ?>
 <div class="domains">
 <?php
@@ -22,7 +25,27 @@
 				</div>
 			</div>
 			<div class="domain_strap">
-				<a href="multi/actions/deletedomain.php?domain_id=<?php echo $domain->getID(); ?>">Delete</a>
+				<a href="multi/actions/deletedomain.php?domain_id=<?php echo $domain->getID(); ?>">Delete</a> <?php
+				if ($domain->isDbInstalled()==0)
+				{
+					?>
+					:: <a href="http://<?php echo $domain->getDomain(); ?>" target="_blank">Install</a>
+					<?php
+				}
+				else
+				{
+					?>
+					:: <a href="http://<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a>
+					<?php
+				}
+				
+				if (($domain->getDBVersion()>0) && ($domain->getDBVersion()<$version))
+				{
+					?>
+					:: <a href="http://<?php echo $domain->getDomain(); ?>/upgrade.php" target="_blank">Upgrade DB</a>
+					<?php
+				}
+				?>
 			</div>
 		</div>	
 		<?php

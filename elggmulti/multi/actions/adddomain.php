@@ -45,6 +45,13 @@
 				$domain->dbhost = $_REQUEST['dbhost'];
 				if (!$domain->dbhost)
 					$domain->dbhost=$CONFIG->multisite->dbhost;
+					
+				$domain->dbprefix = $_REQUEST['dbprefix'];
+				if (!$domain->dbprefix)
+					$domain->dbprefix = 'elgg';
+				
+				$domain->dataroot = dirname(dirname(dirname(__FILE__))) . "/data/$url/";
+				@mkdir($domain->dataroot);
 
 				$dbname = mysql_real_escape_string($domain->dbname);
 				$dbuser = mysql_real_escape_string($domain->dbuser);
