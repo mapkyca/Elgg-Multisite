@@ -30,6 +30,8 @@ INSTALLATION
 		$CONFIG->multisite->dbhost = 'host';
 
 	as appropriate.		
+	
+	It is recommended that this user have the privileges to create databases and grant access to them.
 
 7) Visit your master domain and configure your admin user
 
