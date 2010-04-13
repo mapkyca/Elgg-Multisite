@@ -6,6 +6,7 @@
 		
 		<label>Domain name: <input type="text" class="domain input-text" name="domain" value="" /></label>
 		<?php include(dirname(__FILE__)."/../dbsettings.php"); ?>
+		<?php include(dirname(__FILE__)."/../plugins.php"); ?>
 		<input type="hidden" name="class" value="MultisiteDomain" />
 		<input type="submit" name="Submit" value="Submit" />
 	</form>

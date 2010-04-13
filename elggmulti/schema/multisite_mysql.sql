@@ -37,6 +37,16 @@ CREATE TABLE domains_metadata (
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- Activated plugins
+CREATE TABLE domains_activated_plugins (
+	`id` int(11) unsigned NOT NULL auto_increment,
+	`domain_id` int(11) unsigned  NOT NULL,
+	plugin varchar(50) NOT NULL,
+
+	primary key (`id`),
+	key (`domain_id`),
+	unique key (`domain_id`,`plugin`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Users table
 CREATE TABLE users (

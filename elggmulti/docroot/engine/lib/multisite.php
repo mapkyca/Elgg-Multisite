@@ -70,6 +70,8 @@
 			mysql_select_db($this->dbname, $link);
 			
 			$result = mysql_query("SHOW tables like '{$this->dbprefix}%'", $link);
+			if (!$result) return false;
+			
 			$result = mysql_fetch_object($result);
 			if ($result)
 				return true;
@@ -81,9 +83,12 @@
 		{
 			$link = mysql_connect($this->dbhost, $this->dbuser, $this->dbpass, true);
 			mysql_select_db($this->dbname, $link);
+
+			$result = mysql_query("SELECT * FROM {$this->dbprefix}datalists WHERE name='version'");
 			
-			$result = mysql_fetch_object(mysql_query("SELECT * FROM {$this->dbprefix}datalists WHERE name='version'"));
-		
+			if (!$result) return false;
+			$result = mysql_fetch_object($result);
+			
 			if ($result)
 				(int)$result->value;
 				
@@ -416,6 +421,89 @@
 			return $result;
 		
 		return false;
+	}
+	
+	/**
+	 * Return whether a plugin is available for a given
+	 *
+	 * @param string $plugin
+	 */
+	function elggmulti_is_plugin_available($plugin)
+	{
+		static $activated;
+		
+		if (!$activated)
+			$activated = elggmulti_get_activated_plugins();
+			
+		return in_array($plugin, $activated);
+	}
+	
+	/**
+	 * Get plugins which have been activated for a given domain.
+	 *
+	 * @param int $domain_id
+	 * @return array|false
+	 */
+	function elggmulti_get_activated_plugins($domain_id)
+	{
+		if (!$domain_id)
+		{
+			$result = elggmulti_get_db_settings();
+			
+			$domain_id = $result->getID();
+		}
+		
+		$domain_id = (int)$domain_id;
+		
+		return elggmulti_getdata("SELECT * from domains_activated_plugins where domain_id=$domain_id");
+	}
+	
+	/**
+	 * Return a list of all installed plugins.
+	 *
+	 */
+	function elggmulti_get_installed_plugins()
+	{
+		$plugins = array();
+
+		$path = dirname(dirname(dirname(__FILE__))).'/mod/';
+		
+		if ($handle = opendir($path)) {
+			
+			while ($mod = readdir($handle)) {
+				
+				if (!in_array($mod,array('.','..','.svn','CVS')) && is_dir($path . "/" . $mod)) {
+					$plugins[] = $mod;
+				}
+				
+			}
+		}
+
+		sort($plugins);
+		
+		return $plugins;
+	}
+	
+	/**
+	 * Activate or deactivate a plugin. 
+	 *
+	 * @param unknown_type $domain_id
+	 * @param unknown_type $plugin
+	 * @param unknown_type $activate
+	 */
+	function elggmulti_toggle_plugin($domain_id, $plugin, $activate = true)
+	{
+		$plugin = mysql_real_escape_string($plugin);
+		$domain_id = (int)$domain_id;
+		
+		if ($activate)
+		{
+			elggmulti_execute_query("INSERT into domains_activated_plugins (domain_id, plugin) VALUES ($domain_id, '$plugin')");
+		}
+		else
+		{
+			elggmulti_execute_query("DELETE FROM domains_activated_plugins where domain_id=$domain_id and plugin='$plugin'");			
+		}
 	}
 	
 	function elggmulti_get_messages()

@@ -66,8 +66,19 @@
 					elggmulti_set_message("Unable to grant access on $dbname@$dbhost, please do this manually or you will likely have problems");
 				
 				// Save
-				if ($domain->save())
+				if ($domain_id = $domain->save())
 					elggmulti_set_message('New domain created');
+					
+					
+				// Activate/deactivate plugins
+				$plugins = elggmulti_get_installed_plugins();
+				foreach ($plugins as $plugin)
+				{
+					if (in_array($plugin, $_REQUEST['available_plugins']))
+						elggmulti_toggle_plugin($domain->getID(), $plugin);
+					else
+						elggmulti_toggle_plugin($domain->getID(), $plugin, false);
+				}
 			}
 		}
 		else

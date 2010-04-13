@@ -37,6 +37,16 @@
 				// Save
 				if ($domain->save())
 					elggmulti_set_message('Domain details updated');
+					
+				// Activate/deactivate plugins
+				$plugins = elggmulti_get_installed_plugins();
+				foreach ($plugins as $plugin)
+				{
+					if (in_array($plugin, $_REQUEST['available_plugins']))
+						elggmulti_toggle_plugin($domain->getID(), $plugin);
+					else
+						elggmulti_toggle_plugin($domain->getID(), $plugin, false);
+				}
 			}
 		}
 		else
