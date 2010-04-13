@@ -455,7 +455,12 @@
 		
 		$domain_id = (int)$domain_id;
 		
-		return elggmulti_getdata("SELECT * from domains_activated_plugins where domain_id=$domain_id");
+		$result = elggmulti_getdata("SELECT * from domains_activated_plugins where domain_id=$domain_id");
+		$resultarray = array();
+		foreach ($result as $r)
+			$resultarray[] = $r->plugin;
+		
+		return $resultarray;
 	}
 	
 	/**

@@ -4,17 +4,17 @@
 	if (!$plugins)
 		$plugins = elggmulti_get_installed_plugins();
 
-	$activated = elggmulti_get_activated_plugins($domain->getID())
+	$activated = elggmulti_get_activated_plugins($domain->getID());
 
 ?>
 <h2>Available plugins</h2>
-<select name="available_plugins[]">
+<p>
 	<?php
 		foreach ($plugins as $plugin)
 		{
 	?>
-		<option value="<?php echo $plugin; ?>" <?php if (in_array($plugin, $plugins)) echo 'selected="yes"'; ?>><?php echo $plugin; ?></option>
+		<label><input type="checkbox" name="available_plugins[]" value="<?php echo $plugin; ?>" <?php if (in_array($plugin, $activated)) echo 'checked="true"'; ?> /> <?php echo $plugin; ?></label><br />
 	<?php	
 		}
 	?>
-</select>
+</p>
