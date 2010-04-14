@@ -12,15 +12,20 @@
 		
 		
 		<div id="disp_<?php echo $user->id; ?>" style="display: none;">
-			<div class="domain_display">
+			<div class="user_display">
+				
+				<form action="multi/actions/setpassword.php" method="POST">
 			
-			
-			
-			
-			
-			
-			
-			
+					<p>
+						<label>Password: <input class="password input-password" type="password" name="password" value="" /> </label>
+					</p>
+					<p>
+						<label>Password again: <input class="password input-password" type="password" name="password2" value="" /> </label>
+					</p>
+					<input type="hidden" name="username" value="<?php echo $user->username; ?>" />
+					<input class="submit" type="submit" name="Save" value="Save">
+				</form>
+				
 			
 			</div>
 		</div>
@@ -28,7 +33,7 @@
 		
 		
 		<div class="user_strap">
-			<a href="multi/actions/deleteuser.php?user_id=<?php echo $user->id; ?>">Delete</a>
+			<?php if ((count($users)>1) && ($_SESSION['user']->username!=$user->username)) {?><a href="multi/actions/deleteuser.php?user_id=<?php echo $user->id; ?>">Delete</a><?php } ?>
 		</div>
 	</div>
 <?php
@@ -41,14 +46,7 @@
 		
 		<div id="add_user" style="display: none;">
 			<div class="user_form">
-			
-
-
-
-
-
-
-
+				<?php include(dirname(dirname(__FILE__)) . '/registeruser.php'); ?>			
 			</div>
 		</div>
 	</div>

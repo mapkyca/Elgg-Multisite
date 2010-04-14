@@ -5,7 +5,7 @@
 	<form action="multi/actions/register.php" method="POST">
 
 		<p>
-			<label>Username: <input class="username input-text" type="text" name="username" value="" /> </label>
+			<label>Username: <input class="username input-text" type="text" name="username" value="<?php echo $user->username; ?>" /> </label>
 		</p>
 		<p>
 			<label>Password: <input class="password input-password" type="password" name="password" value="" /> </label>

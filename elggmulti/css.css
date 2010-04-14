@@ -66,26 +66,30 @@ div.mainform div.form_menu {
 }
 
 
-div.domains, div.domain_forms {
+div.domains, div.domain_forms, div.users, div.user_forms {
 	margin-left: 30px;
 	margin-right: 30px;
 	margin-bottom: 5px;
 }
 
-div.domain {
+div.domain, div.user {
 	background-color:#F5F5F5;
 border:1px solid #E3E4E4;
 	padding: 5px;
 	margin-bottom:5px;
 }
 
-div.domain_form, div.domain_display {
+div.domain_form, div.domain_display, div.user_form, div.user_display {
 	padding:5px;
 	background-color: #fff;
 	border:1px solid #E3E4E4;
 	margin-top: 5px;
 }
 
+
+div.domains div.inaccessible {
+	background-color: #FFDADA;
+}
 
 div.message {
 	color:#fff;
@@ -147,9 +151,6 @@ div.mainnav li:hover a, div.mainnav li.selected a {
 	color: #fff;
 }
 
-div.domains div.inaccessible {
-	background-color: #FFDADA;
-}
 
 /* ***************************************
 	GENERAL FORM ELEMENTS
