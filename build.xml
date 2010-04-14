@@ -13,6 +13,7 @@
 	<property name="tmp" value="/tmp/" />
 	
 	<target name="build">
+		
 	
 		<unzip src="${elggpackage}" dest="${tmp}elggmultibase/" overwrite="yes" />
 		
@@ -40,6 +41,8 @@
 	</target>
 	
 	<target name="release">
+
+		<tstamp/>
 		<antcall target="build">
 			<param name="output" value="${output_live}docroot/"/>
 			<param name="task" value="live"/>
