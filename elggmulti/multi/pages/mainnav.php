@@ -2,7 +2,8 @@
 	global $context;
 	
 	$pages = array(
-		'domains' => 'Domains'
+		'domains' => 'Domains',
+		'users' => 'Users'
 	);
 ?>
 <div class="navbar">

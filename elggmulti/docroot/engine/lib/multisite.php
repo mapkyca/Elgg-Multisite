@@ -419,6 +419,16 @@
 	}
 	
 	/**
+	 * Get users
+	 *
+	 * @return unknown
+	 */
+	function elggmulti_getusers()
+	{
+		return elggmulti_getdata("SELECT * from users");
+	}
+	
+	/**
 	 * Retrieve db settings.
 	 *
 	 * Retrieve a database setting based on the current multisite domain
