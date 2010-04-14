@@ -39,9 +39,9 @@
 	</div><div class="clearfloat"></div>
 	<div class="admin_plugin_enable_disable">
 		<?php if ($active) { ?>
-			<a href="<?php echo $vars['url']; ?>action/elggmulti/admin/plugins/disable?plugin=<?php echo $plugin; ?>&__elgg_token=<?php echo $token; ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo("disable"); ?></a>
+			<a href="<?php echo $vars['url']; ?>action/admin/plugins/disable?plugin=<?php echo $plugin; ?>&__elgg_token=<?php echo $token; ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo("disable"); ?></a>
 		<?php } else { ?>
-			<a href="<?php echo $vars['url']; ?>action/elggmulti/admin/plugins/enable?plugin=<?php echo $plugin; ?>&__elgg_token=<?php echo $token; ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo("enable"); ?></a>
+			<a href="<?php echo $vars['url']; ?>action/admin/plugins/enable?plugin=<?php echo $plugin; ?>&__elgg_token=<?php echo $token; ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo("enable"); ?></a>
 		<?php } ?>
 	</div>
 

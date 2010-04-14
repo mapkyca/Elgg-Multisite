@@ -147,6 +147,9 @@ div.mainnav li:hover a, div.mainnav li.selected a {
 	color: #fff;
 }
 
+div.domains div.inaccessible {
+	background-color: #FFDADA;
+}
 
 /* ***************************************
 	GENERAL FORM ELEMENTS

@@ -58,7 +58,12 @@
  		 *
  		 * @return unknown
  		 */
-		public function isSiteAccessible() { return true; }
+		public function isSiteAccessible() {
+			if ($this->enabled == 'no')
+				return false;
+				 
+			return true; 
+		}
 		
 		public function setDomain($url) { $this->domain = $url; }
 		public function getDomain() {return $this->domain; }
@@ -93,6 +98,24 @@
 				(int)$result->value;
 				
 			return false;
+		}
+		
+		public function disable_plugin($plugin)
+		{
+			return $this->toggle_plugin($plugin, false);
+		}
+		
+		public function enable_plugin($plugin)
+		{
+			return $this->toggle_plugin($plugin, true);
+		}
+		
+		protected function toggle_plugin($plugin, $enable = true)
+		{
+			$link = mysql_connect($this->dbhost, $this->dbuser, $this->dbpass, true);
+			mysql_select_db($this->dbname, $link);
+			
+			// TODO: Implement
 		}
  		
 		/**
@@ -416,6 +439,24 @@
 			$url = $_SERVER['SERVER_NAME'];
 
 		$result = elggmulti_getdata_row("SELECT * from domains WHERE domain='$url' LIMIT 1", '__elggmulti_db_row');
+		
+		if ($result) {
+			
+			if (!$result->isSiteAccessible())
+				return false;
+			
+			return $result;
+		}
+			
+		
+		return false;
+	}
+	
+	function elggmulti_get_db_by_id($id)
+	{
+		$id = (int)$id;
+		
+		$result = elggmulti_getdata_row("SELECT * from domains WHERE id=$id LIMIT 1", '__elggmulti_db_row');
 	
 		if ($result)
 			return $result;
@@ -444,7 +485,7 @@
 	 * @param int $domain_id
 	 * @return array|false
 	 */
-	function elggmulti_get_activated_plugins($domain_id)
+	function elggmulti_get_activated_plugins($domain_id = false)
 	{
 		if (!$domain_id)
 		{
@@ -478,7 +519,8 @@
 			while ($mod = readdir($handle)) {
 				
 				if (!in_array($mod,array('.','..','.svn','CVS')) && is_dir($path . "/" . $mod)) {
-					$plugins[] = $mod;
+					if ($mod!='pluginmanager') // hide plugin manager
+						$plugins[] = $mod;
 				}
 				
 			}
@@ -507,7 +549,11 @@
 		}
 		else
 		{
-			elggmulti_execute_query("DELETE FROM domains_activated_plugins where domain_id=$domain_id and plugin='$plugin'");			
+			elggmulti_execute_query("DELETE FROM domains_activated_plugins where domain_id=$domain_id and plugin='$plugin'");
+
+			$domain = elggmulti_get_db_by_id($id);
+			if ($domain)
+				$domain->disable_plugin($plugin);
 		}
 	}
 	

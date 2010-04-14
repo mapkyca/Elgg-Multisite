@@ -17,7 +17,7 @@
 		
 			$d = strtolower(get_class($domain));
 		?>
-		<div class="domain">
+		<div class="domain<?php if ($domain->enabled=='no') echo " disabled"; ?><?php if (!$domain->isSiteAccessible()) echo " inaccessible"; ?>">
 			<a href="#" onclick="showhide('disp_<?php echo $domain->getID(); ?>');"><b><?php echo $url; ?></b> (<?php echo $label; ?>) </a>
 			<div id="disp_<?php echo $domain->getID(); ?>" style="display: none;">
 				<div class="domain_display">
@@ -26,6 +26,18 @@
 			</div>
 			<div class="domain_strap">
 				<a href="multi/actions/deletedomain.php?domain_id=<?php echo $domain->getID(); ?>">Delete</a> <?php
+				if ($domain->enabled=='no')
+				{
+					?>
+					:: <a href="multi/actions/enabledomain.php?domain_id=<?php echo $domain->getID(); ?>">Enable</a>
+					<?php
+				}
+				else
+				{
+					?>
+					:: <a href="multi/actions/disabledomain.php?domain_id=<?php echo $domain->getID(); ?>">Disable</a>
+					<?php
+				}
 				if ($domain->isDbInstalled()==0)
 				{
 					?>
@@ -45,6 +57,7 @@
 					:: <a href="http://<?php echo $domain->getDomain(); ?>/upgrade.php" target="_blank">Upgrade DB</a>
 					<?php
 				}
+				
 				?>
 			</div>
 		</div>	
