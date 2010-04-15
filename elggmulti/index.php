@@ -53,7 +53,7 @@
 	?>
 	</div>
 	<div class="footer">
-		<div class="copyright"><a href="http://www.unofficialelgg.com/wiki/ElggMultisite/">ElggMultisite</a> brought to you by <a href="http://www.unofficialelgg.com/" target="_blank">UnofficialElgg.com</a></div>
+		<div class="copyright"><a href="http://www.unofficialelgg.com/wiki/ElggMultisite/">ElggMultisite</a> is (C) Copyright <a href="http://www.marcus-povey.co.uk">Marcus Povey</a> and <a href="http://www.unofficialelgg.com/" target="_blank">UnofficialElgg.com</a> 2010</div>
 	</div>
 	</body>
 </html>
