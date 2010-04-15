@@ -7,7 +7,7 @@
 	if ($domain instanceof MultisiteDomain) 
 		$activated = elggmulti_get_activated_plugins($domain->getID());
 	else
-		$activated = array();
+		$activated = $plugins;
 
 ?>
 <h2>Available plugins</h2>
