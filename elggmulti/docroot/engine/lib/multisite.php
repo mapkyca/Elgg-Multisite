@@ -565,7 +565,7 @@
 		{
 			elggmulti_execute_query("DELETE FROM domains_activated_plugins where domain_id=$domain_id and plugin='$plugin'");
 
-			$domain = elggmulti_get_db_by_id($id);
+			$domain = elggmulti_get_db_by_id($domain_id);
 			if ($domain)
 				$domain->disable_plugin($plugin);
 		}
