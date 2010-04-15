@@ -3,8 +3,7 @@
 --
 -- @package ElggMultisite
 -- @author Marcus Povey <marcus@marcus-povey.co.uk>
--- @copyright Marcus Povey / UnofficialElgg.com 2010
--- @link http://www.unofficialelgg.com/
+-- @copyright Marcus Povey 2010
 -- @link http://www.marcus-povey.co.uk/
 --
 

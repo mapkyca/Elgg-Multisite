@@ -1,13 +1,12 @@
 Elgg Multisite
-(c) Copyright Marcus Povey / UnofficialElgg.com 2010
+(c) Copyright Marcus Povey 2010
 
 This is a version of Elgg which supports multiple sites on a single
 installation.
 
 It was created and copyrighted by:
-
-Marcus Povey <marcus@marcus-povey.co.uk>
-UnofficialElgg.com <info@unofficialelgg.com>
+	
+	Marcus Povey <marcus@marcus-povey.co.uk>
 
 INSTALLATION
 
