@@ -52,7 +52,7 @@
 			<param name="task" value="live"/>
 		</antcall>
 		
-		<zip destfile="releases/elggmultisite-${elggmultiversion}.zip" basedir="${output_live}" />
+		<zip destfile="releases/elggmultisite-${elggmultiversion}.zip" basedir="${output_release}" />
 	</target>
 
 </project>
