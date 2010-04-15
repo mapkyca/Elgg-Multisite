@@ -42,7 +42,7 @@
 	$CONFIG->dbprefix = $db_settings->dbprefix;
 
 	/** Default plugins */
-	$CONFIG->default_plugins = 'profile, river, logbrowser, diagnostics, uservalidationbyemail, htmlawed, search, pluginmanager';
+	$CONFIG->default_plugins = 'profile, river, logbrowser, uservalidationbyemail, htmlawed, search, pluginmanager';
 	
 	// URL
 	$CONFIG->url = "";
