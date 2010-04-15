@@ -44,6 +44,13 @@
 		</antcall>
 	</target>
 	
+	<target name="live">
+		<antcall target="build">
+			<param name="output" value="${output_live}"/>
+			<param name="task" value="live"/>
+		</antcall>
+	</target>
+	
 	<target name="release">
 
 		<tstamp/>
