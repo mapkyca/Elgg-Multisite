@@ -109,12 +109,60 @@
 			return $this->toggle_plugin($plugin, true);
 		}
 		
-		protected function toggle_plugin($plugin, $enable = true)
+		protected function toggle_plugin($plugin, $enable = true, $site_id = 1)
 		{
+			//TODO: Handle nested sites
+			
 			$link = mysql_connect($this->dbhost, $this->dbuser, $this->dbpass, true);
 			mysql_select_db($this->dbname, $link);
 			
-			// TODO: Implement
+			$plugin = mysql_real_escape_string($plugin);
+			$site_id = (int)$site_id;
+			
+			
+			$result = mysql_query("SELECT * FROM {$this->dbprefix}metastrings WHERE string='enabled_plugins'",$link);
+			if (!$result) return false;
+			$string = mysql_fetch_object($result);
+			if (!$string) {
+				mysql_query("INSERT into {$this->dbprefix}metastrings (string) VALUES ('enabled_plugins')");
+				$enabled_id = mysql_insert_id($link);	
+			}
+			else
+			{
+				
+				$enabled_id = $string->id;
+			}
+			
+			$result = mysql_query("SELECT * FROM {$this->dbprefix}metastrings WHERE string='$plugin'", $link);
+			if (!$result) return false;
+			$string = mysql_fetch_object($result);
+			if (!$string) {
+				mysql_query("INSERT into {$this->dbprefix}metastrings (string) VALUES ('$plugin')");
+				$plugin_id = mysql_insert_id($link);	
+			}
+			else
+			{
+				
+				$plugin_id = $string->id;	
+			}
+			
+			// Insert metadata
+			if ($enable)
+			{ 
+			/*	$query = "INSERT INTO {$this->dbprefix}metadata (entity_guid, name_id, value_id, value_type, owner_guid, access_id, time_created) VALUES($site_id, $enabled_id, $plugin_id, 'text', 2, 2, '".time()."')";
+			
+				mysql_query($query);*/
+				
+				// TODO : Enable
+			}
+			else
+			{
+				$query = "DELETE from {$this->dbprefix}metadata WHERE entity_guid=$site_id and name_id=$enabled_id and value_id=$plugin_id";
+			
+				mysql_query($query);
+			}
+			
+			return true;
 		}
  		
 		/**
