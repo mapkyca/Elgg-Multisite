@@ -349,7 +349,11 @@
 	 */
 	function elggmulti_logout()
 	{
-		unset ($_SESSION['user']); 
+		unset ($_SESSION['user']);
+
+		session_destroy();
+		
+		return true;
 	}
 	
 	/**
@@ -400,9 +404,9 @@
 			
 		$dblink = elggmulti_db_connect();
 
-		$username = mysql_real_escape_string($username);
-		$password = mysql_real_escape_string($password);
-		$salt = substr(md5(rand(), 0, 8));
+		$salt = substr(md5(rand()), 0, 8);
+		$username = mysql_real_escape_string(strtolower($username));
+		$password = md5(mysql_real_escape_string($password) . $salt);
 
 		return elggmulti_execute_query("UPDATE users SET password='$password', salt='$salt' WHERE username='$username'");
 	}

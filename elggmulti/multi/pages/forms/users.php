@@ -42,11 +42,26 @@
 </div>
 <div class="users_forms">
 	<div class="users">
-		<a href="#" onclick="showhide('add_user');">Add a new user...</a>
-		
-		<div id="add_user" style="display: none;">
-			<div class="user_form">
-				<?php include(dirname(dirname(__FILE__)) . '/registeruser.php'); ?>			
+		<div class="user">
+			<a href="#" onclick="showhide('add_user');">Add a new user...</a>
+			
+			<div id="add_user" style="display: none;">
+				<div class="user_form">
+					<form action="multi/actions/register.php" method="POST">
+	
+						<p>
+							<label>Username: <input class="username input-text" type="text" name="username" value="<?php echo $user->username; ?>" /> </label>
+						</p>
+						<p>
+							<label>Password: <input class="password input-password" type="password" name="password" value="" /> </label>
+						</p>
+						<p>
+							<label>Password again: <input class="password input-password" type="password" name="password2" value="" /> </label>
+						</p>
+				
+						<input class="submit" type="submit" name="Save" value="Save">
+					</form>		
+				</div>
 			</div>
 		</div>
 	</div>
