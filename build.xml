@@ -55,11 +55,11 @@
 
 		<tstamp/>
 		<antcall target="build">
-			<param name="output" value="${output_release}elggmulti_${elggmultiversion}/"/>
+			<param name="output" value="${output_release}multisiteelgg_${elggmultiversion}/"/>
 			<param name="task" value="live"/>
 		</antcall>
 		
-		<zip destfile="releases/elggmultisite-${elggmultiversion}.zip" basedir="${output_release}" />
+		<zip destfile="releases/multisiteelgg-${elggmultiversion}.zip" basedir="${output_release}" />
 	</target>
 
 </project>
