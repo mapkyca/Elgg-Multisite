@@ -53,8 +53,7 @@
 	?>
 	</div>
 	<div class="footer">
-		<div class="copyright">ElggMultisite is (C) Copyright <a href="http://www.marcus-povey.co.uk">Marcus Povey</a> 2010<br />
-		Elgg is (C) Copyright <a href="http://www.curverider.co.uk/">Curverider</a> 2008-10</div>
+		<div class="copyright">ElggMultisite is (C) Copyright <a href="http://www.marcus-povey.co.uk">Marcus Povey</a> 2010</div>
 	</div>
 	</body>
 </html>
