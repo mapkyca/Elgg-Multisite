@@ -1,4 +1,4 @@
-Elgg Multisite
+Marcus Povey's Multisite for Elgg
 (c) Copyright Marcus Povey 2010
 
 This is a version of Elgg which supports multiple sites on a single

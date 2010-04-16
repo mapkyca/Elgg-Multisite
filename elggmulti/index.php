@@ -5,7 +5,7 @@
 ?>
 <html>
 	<head>
-		<title>Elgg Multisite</title>
+		<title>Marcus Povey's Multisite Elgg</title>
 		<link rel="stylesheet" href="css.css" type="text/css" />
 		<script type="text/javascript" language="javascript">
 		<!--
@@ -53,7 +53,7 @@
 	?>
 	</div>
 	<div class="footer">
-		<div class="copyright">ElggMultisite is (C) Copyright <a href="http://www.marcus-povey.co.uk">Marcus Povey</a> 2010</div>
+		<div class="copyright">MP's Multisite for Elgg is (C) Copyright <a href="http://www.marcus-povey.co.uk">Marcus Povey</a> 2010</div>
 	</div>
 	</body>
 </html>

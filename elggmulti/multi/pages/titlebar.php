@@ -14,5 +14,5 @@
 	}
 
 ?>
-	<h1>ElggMultisite</h1>
+	<h1>Multisite Elgg</h1>
 </div>
