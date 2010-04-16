@@ -20,7 +20,7 @@ INSTALLATION
 
 3) Point any sub domains to the contents of the docroot folder, eg (/var/elggmulti/docroot)
 
-4) Chmod 777 docroot/data - this is the default location for elgg multi domains.
+4) Chmod 777 docroot/data - this is the default location for elgg multi domains data directories.
 
 5) Install schema/multisite_mysql.sql
 
