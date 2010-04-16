@@ -14,7 +14,7 @@ INSTALLATION
 
 1) Unzip the package on your web server.
 
-2) Point your master domain at the contents of the install location on your web server (e.g /var/elggmulti)
+2) Point your master domain at the contents of the install location on your web server (e.g /var/multisite)
 	You will want to make sure that this location is behind some form of access restriction limiting it to only
 	your organisation as it will contain the data root of all elgg domains.
 
