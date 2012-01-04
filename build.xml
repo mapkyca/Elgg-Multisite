@@ -5,9 +5,7 @@
 	<property name="elggmultiversion" value="1.7beta" />
 	
 	<!-- Deployment settings -->
-	<property name="output_local" value="/home/icewing/public_html/elggmulti/" />
-	<property name="output_live" value="/home/www/hosting.unofficialelgg.com/html/" />
-	<property name="output_release" value="/tmp/elggmulti/" />
+	<property name="output_release" value="releases/" />
 	
 	<!-- Base Elgg package -->
 	<property name="elggversion" value="1.7" />
@@ -35,20 +33,6 @@
 			</fileset>
 		</copy>
 	
-	</target>
-	
-	<target name="local">
-		<antcall target="build">
-			<param name="output" value="${output_local}"/>
-			<param name="task" value="live"/>
-		</antcall>
-	</target>
-	
-	<target name="live">
-		<antcall target="build">
-			<param name="output" value="${output_live}"/>
-			<param name="task" value="live"/>
-		</antcall>
 	</target>
 	
 	<target name="release">
