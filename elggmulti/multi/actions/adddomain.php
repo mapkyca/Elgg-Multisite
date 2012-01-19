@@ -63,7 +63,7 @@
 					elggmulti_set_message("Could not create database $dbname@$dbhost, perhaps it already exists?");
 					
 				if (!elggmulti_execute_query("grant all on $dbname.* to `$dbuser`@`$dbhost` identified by '$dbpass'"))
-					elggmulti_set_message("Unable to grant access to `$dbname`@`$dbhost`, please do this manually or you will likely have problems");
+					elggmulti_set_message("Unable to grant access (all) to `$dbuser`@`$dbhost` on $dbname, please do this manually or you will likely have problems.");
 				
 				// Save
 				if ($domain_id = $domain->save())
