@@ -45,5 +45,12 @@
 		
 		<zip destfile="releases/multisiteelgg-${elggmultiversion}.zip" basedir="${output_release}" />
 	</target>
+	
+	<target name="test">
+	    <antcall target="build">
+		    <param name="output" value="${user.home}/public_html/multisiteelgg_${elggmultiversion}/"/>
+		    <param name="task" value="test"/>
+	    </antcall>
+	</target>
 
 </project>
