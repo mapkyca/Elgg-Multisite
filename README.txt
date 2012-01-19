@@ -4,4 +4,27 @@ Multisite for Elgg
 Released under GPLv2 (See LICENCE.txt)
 ===============================================================
 
-See elggmulti/README.txt
+What is it?
+===========
+
+MP Multisite for Elgg allows you to run multiple separate Elgg 
+sites off of the same install of the codebase, saving disk 
+space and making administration a whole bunch easier.
+
+Once installed, adding new Elgg sites is a matter of clicking 
+on a button and entering in some details.
+
+What can I do with it?
+======================
+
+You can do everything that you can do with Elgg, but with the 
+ability to create new networks on demand. This will for example 
+let you:
+
+* Set up your own version of Ning!
+* In your organisation or institution, easily set up Elgg 
+  sites for each department.
+* ... etc...
+
+See elggmulti/README.txt for more...
+
