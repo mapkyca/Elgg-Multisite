@@ -39,9 +39,6 @@
 	$CONFIG->dbname = $db_settings->dbname;
 	$CONFIG->dbhost = $db_settings->dbhost;
 	$CONFIG->dbprefix = $db_settings->dbprefix;
-
-	/** Default plugins */
-	$CONFIG->default_plugins = 'profile, river, logbrowser, uservalidationbyemail, htmlawed, search, pluginmanager';
 	
 	// URL
 	$CONFIG->url = "";
