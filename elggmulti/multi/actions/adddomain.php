@@ -60,7 +60,7 @@
 					
 				// Try and create the database using registered 
 				if (!elggmulti_execute_query("CREATE database $dbname"))
-					elggmulti_set_message("Could not create database $dbname@$dbhost, perhaps it already exists?");
+					elggmulti_set_message("Could not create database $dbname@$dbhost, check permissions and check that it doesn't already exist!");
 					
 				if (!elggmulti_execute_query("grant all on $dbname.* to `$dbuser`@`$dbhost` identified by '$dbpass'"))
 					elggmulti_set_message("Unable to grant access (all) to `$dbuser`@`$dbhost` on $dbname, please do this manually or you will likely have problems.");
