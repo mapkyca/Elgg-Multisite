@@ -53,7 +53,7 @@
 	?>
 	</div>
 	<div class="footer">
-		<div class="copyright">MP's Multisite for Elgg is (C) Copyright <a href="http://www.marcus-povey.co.uk">Marcus Povey</a> 2010</div>
+		<div class="copyright">MP's Multisite for Elgg is (C) Copyright <a href="http://www.marcus-povey.co.uk">Marcus Povey</a> 2010-<?php echo date('y'); ?></div>
 	</div>
 	</body>
 </html>
