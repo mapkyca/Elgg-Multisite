@@ -2,16 +2,19 @@
 	$messages = elggmulti_get_messages();
 ?>
 <div class="messages">
-<?php
-	if ($messages) {
+    <?php if ($messages) { ?>
+    <div class="message">
+	<ul>
+	<?php
+	
 		foreach ($messages as $message)
 		{
 		?>
-	<div class="message">
-		<p><?php echo $message; ?></p>
-	</div>
+	<li><?php echo $message; ?></li>
 		<?php	
-		}
-	}
+		}	
 ?>
+	</ul>
+    </div>
+    <?php } ?>
 </div>
