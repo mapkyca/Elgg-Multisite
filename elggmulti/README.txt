@@ -7,7 +7,7 @@ Released under GPLv2 (See LICENCE.txt)
 This is a version of Elgg which supports multiple sites on a 
 single installation.
 
-This is currently based on Elgg 1.7.
+This is currently based on Elgg 1.8.3.
 
 BACKGROUND
 ==========
