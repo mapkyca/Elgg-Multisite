@@ -41,7 +41,7 @@
 				if ($domain->isDbInstalled()==0)
 				{
 					?>
-					:: <a href="http://<?php echo $domain->getDomain(); ?>" target="_blank">Install</a>
+					:: <a href="http://<?php echo $domain->getDomain(); ?>/install.php" target="_blank">Install</a>
 					<?php
 				}
 				else
