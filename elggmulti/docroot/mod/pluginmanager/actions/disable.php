@@ -1,25 +1,56 @@
 <?php
+/**
+ * Deactivate a plugin or plugins.
+ *
+ * Plugins to be deactivated are passed via $_REQUEST['plugin_guids'] as GUIDs.
+ * After deactivating the plugin(s), the views cache and simplecache are invalidated.
+ *
+ * @uses mixed $_GET['plugin_guids'] The GUIDs of the plugin to deactivate. Can be an array.
+ *
+ * @package Elgg.Core
+ * @subpackage Administration.Plugins
+ */
+
+$plugin_guids = get_input('plugin_guids');
+
+if (!is_array($plugin_guids)) {
+	$plugin_guids = array($plugin_guids);
+}
+
+foreach ($plugin_guids as $guid) {
+    
+    $plugin = get_entity($guid);
+    
+    if (elggmulti_is_plugin_available($plugin->getID())) {
 	
-	admin_gatekeeper();
-	action_gatekeeper();
-	
-	// Get the plugin
-	$plugin = get_input('plugin');
-	if (!is_array($plugin)) {
-		$plugin = array($plugin);
+	if (!($plugin instanceof ElggPlugin)) {
+		register_error(elgg_echo('admin:plugins:deactivate:no', array($guid)));
+		continue;
 	}
-	
-	foreach ($plugin as $p) {
-		// Disable
-		if (($p != 'pluginmanager') && (disable_plugin($p))) {
-			system_message(sprintf(elgg_echo('admin:plugins:disable:yes'), $p));
-		} else {
-			register_error(sprintf(elgg_echo('admin:plugins:disable:no'), $p));
-		}
+
+	if ($plugin->deactivate()) {
+		//system_message(elgg_echo('admin:plugins:deactivate:yes', array($plugin->getManifest()->getName())));
+	} else {
+		$msg = $plugin->getError();
+		$string = ($msg) ? 'admin:plugins:deactivate:no_with_msg' : 'admin:plugins:deactivate:no';
+		register_error(elgg_echo($string, array($plugin->getFriendlyName(), $plugin->getError())));
 	}
-	
-	elgg_view_regenerate_simplecache();
-	elgg_filepath_cache_reset();
-	
-	forward($_SERVER['HTTP_REFERER']);
-?>
+    }
+}
+
+// don't regenerate the simplecache because the plugin won't be
+// loaded until next run.  Just invalidate and let it regnerate as needed
+elgg_invalidate_simplecache();
+elgg_filepath_cache_reset();
+
+if (count($plugin_guids) == 1) {
+	$url = 'admin/plugins';
+	$query = (string)parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY);
+	if ($query) {
+		$url .= "?$query";
+	}
+	$plugin = get_entity($plugin_guids[0]);
+	forward("$url#{$plugin->getID()}");
+} else {
+	forward(REFERER);
+}
