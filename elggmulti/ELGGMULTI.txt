@@ -24,7 +24,7 @@ INSTALLATION
 
 5) Install schema/multisite_mysql.sql
 
-6) Rename settings.example.php in /var/multisite/docroot/elgg/engine/ to settings.php and configure:
+6) Rename settings.example.php in /var/multisite/docroot/engine/ to settings.php and configure:
 	
 		$CONFIG->multisite->dbuser = 'your username';
 		$CONFIG->multisite->dbpass = 'password';
