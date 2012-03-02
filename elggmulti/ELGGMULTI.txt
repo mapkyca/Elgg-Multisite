@@ -20,11 +20,11 @@ INSTALLATION
 
 3) Point any sub domains to the contents of the docroot folder, eg (/var/multisite/docroot)
 
-4) Chmod 777 docroot/data - this is the default location for multisite domains data directories.
+4) Chmod 777 /var/multisite/data - this is the default location for multisite domains data directories.
 
 5) Install schema/multisite_mysql.sql
 
-6) Rename settings.example.php in docroot/elgg/engine/ to settings.php and configure:
+6) Rename settings.example.php in /var/multisite/docroot/elgg/engine/ to settings.php and configure:
 	
 		$CONFIG->multisite->dbuser = 'your username';
 		$CONFIG->multisite->dbpass = 'password';
