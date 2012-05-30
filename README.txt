@@ -14,6 +14,8 @@ space and making administration a whole bunch easier.
 Once installed, adding new Elgg sites is a matter of clicking 
 on a button and entering in some details.
 
+You are looking at the Elgg 1.7 Branch.
+
 What can I do with it?
 ======================
 
