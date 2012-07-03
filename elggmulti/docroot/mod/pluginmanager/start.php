@@ -14,15 +14,15 @@
 
 	function pluginmanager_init()
 	{
-		global $CONFIG;
+		$base = elgg_get_plugins_path();
 		
-		register_action('admin/plugins/activate', false, $CONFIG->pluginspath . 'pluginmanager/actions/enable.php', true); // Enable
-		register_action('admin/plugins/deactivate', false, $CONFIG->pluginspath . 'pluginmanager/actions/disable.php', true); // Disable
-		register_action('admin/plugins/activate_all', false, $CONFIG->pluginspath . 'pluginmanager/actions/enableall.php', true); // Enable all
-		register_action('admin/plugins/deactiveate_all', false, $CONFIG->pluginspath . 'pluginmanager/actions/disableall.php', true); // Disable all
+		elgg_register_action('admin/plugins/activate', $base . 'pluginmanager/actions/enable.php'); // Enable
+		elgg_register_action('admin/plugins/deactivate', $base . 'pluginmanager/actions/disable.php'); // Disable
+		elgg_register_action('admin/plugins/activate_all', $base . 'pluginmanager/actions/enableall.php'); // Enable all
+		elgg_register_action('admin/plugins/deactiveate_all', $base . 'pluginmanager/actions/disableall.php'); // Disable all
 	
 		//register_action('admin/plugins/set_priority', false, $CONFIG->pluginspath . 'pluginmanager/actions/reorder.php', true); // Reorder
 	}
 	
 		
-	register_elgg_event_handler('init','system','pluginmanager_init');
+	elgg_register_event_handler('init','system','pluginmanager_init');
