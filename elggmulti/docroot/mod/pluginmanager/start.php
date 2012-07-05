@@ -21,6 +21,7 @@
 		elgg_register_action('admin/plugins/activate_all', $base . 'pluginmanager/actions/enableall.php'); // Enable all
 		elgg_register_action('admin/plugins/deactiveate_all', $base . 'pluginmanager/actions/disableall.php'); // Disable all
 	
+		elgg_register_action('admin/site/update_advanced', $base . 'pluginmanager/actions/update_advanced.php'); // Disable all
 		//register_action('admin/plugins/set_priority', false, $CONFIG->pluginspath . 'pluginmanager/actions/reorder.php', true); // Reorder
 		
 	}
@@ -36,5 +37,5 @@
 	    $CONFIG->dataroot = $CONFIG->elgg_multisite_settings->dataroot;
 	}
 		
-	elgg_register_event_handler('init','system','pluginmanager_init');
+	elgg_register_event_handler('init','system','pluginmanager_init',999);
 	elgg_register_event_handler('plugins_boot', 'system', 'pluginmanager_multisite_boot', 999);
