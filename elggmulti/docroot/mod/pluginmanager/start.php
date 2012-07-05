@@ -22,7 +22,19 @@
 		elgg_register_action('admin/plugins/deactiveate_all', $base . 'pluginmanager/actions/disableall.php'); // Disable all
 	
 		//register_action('admin/plugins/set_priority', false, $CONFIG->pluginspath . 'pluginmanager/actions/reorder.php', true); // Reorder
+		
 	}
 	
+	/**
+	 * Hook into boot events, make sure settings are correctly preserved.
+	 * @global type $CONFIG 
+	 */
+	function pluginmanager_multisite_boot() {
+	    
+	    global $CONFIG;
+	    
+	    $CONFIG->dataroot = $CONFIG->elgg_multisite_settings->dataroot;
+	}
 		
 	elgg_register_event_handler('init','system','pluginmanager_init');
+	elgg_register_event_handler('plugins_boot', 'system', 'pluginmanager_multisite_boot', 999);
