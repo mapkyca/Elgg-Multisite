@@ -22,6 +22,8 @@
 		register_action('admin/plugins/disableall', false, $CONFIG->pluginspath . 'pluginmanager/actions/disableall.php', true); // Disable all
 	
 		register_action('admin/plugins/reorder', false, $CONFIG->pluginspath . 'pluginmanager/actions/reorder.php', true); // Reorder
+		
+		register_action('admin/site/update_basic', false, $CONFIG->pluginspath . 'pluginmanager/actions/update_basic.php', true); // Register basic site admin action
 	}
 	
 		
