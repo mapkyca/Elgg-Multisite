@@ -16,5 +16,17 @@
 ?>
 	</ul>
     </div>
+    <script>
+	<!--
+	$(document).ready(function() {
+	      $('div.messages div.message').click(function(){
+		    $(this).fadeOut();
+	      })
+
+	      setTimeout(function() { $('div.messages div.message').fadeOut(); }, 5000);
+	});
+	    
+	-->
+    </script>
     <?php } ?>
 </div>

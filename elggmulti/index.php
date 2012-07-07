@@ -1,26 +1,30 @@
 <?php
 	require_once(dirname(__FILE__) . '/multi/start.php');
 	
+	header("Content-type: text/html; charset=UTF-8");
 	
-?>
+?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Marcus Povey's Multisite Elgg</title>
-		<link rel="stylesheet" href="css.css" type="text/css" />
-		<script type="text/javascript" language="javascript">
-		<!--
-			function showhide(id)
-			{
-				var e = document.getElementById(id);
-					
-				if(e.style.display == 'none') {
-					e.style.display = 'block';
-				} else {
-					e.style.display = 'none';
-				} 
-			}
-		// -->
-		</script> 
+	    <meta charset="utf-8" />
+	    <title>Marcus Povey's Multisite Elgg</title>
+	    <link rel="stylesheet" href="css.css" type="text/css" />
+	    <script type="text/javascript" src="multi/vendor/h5f.min.js" /></script>
+	    <script type="text/javascript" src="multi/vendor/jquery-1.7.2.min.js" /></script>
+	    <script type="text/javascript" language="javascript">
+	    <!--
+		    function showhide(id)
+		    {
+			    var e = document.getElementById(id);
+
+			    if(e.style.display == 'none') {
+				    e.style.display = 'block';
+			    } else {
+				    e.style.display = 'none';
+			    } 
+		    }
+	    // -->
+	    </script> 
 	</head>
 	
 	<body>
