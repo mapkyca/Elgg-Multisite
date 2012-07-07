@@ -28,5 +28,26 @@ let you:
   sites for each department.
 * ... etc...
 
+Building from Git
+=================
+
+Please note, you can not run elgg multisite straight from a git 
+checkout. I.e. You can't just git clone the repo into a directory
+and point your webserver at it.
+
+To run from a git checkout you must build the project.
+
+To help you do this the project includes an Apache Ant build file
+which contains some handy installation options:
+
+* ant test - builds and installs into 
+	CURRENTUSER/~public_html/multisiteelgg_VERSION
+
+* ant release - builds a release .zip file which you can use
+	to install into another location.
+
+Modify paths accordingly.
+
+
 See elggmulti/README.txt for more...
 
