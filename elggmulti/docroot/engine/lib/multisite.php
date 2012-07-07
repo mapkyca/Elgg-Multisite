@@ -247,7 +247,7 @@
 		public static function getDomainTypes() 
 		{
 			return array (
-				'MultisiteDomain' => 'Default Elgg domain',
+				'MultisiteDomain' => 'Elgg domain',
 			);
 		}
 		
