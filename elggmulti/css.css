@@ -1,12 +1,65 @@
 @CHARSET "UTF-8";
-body {
-	margin:0 auto;
+
+/*
+    YUI Reset stylesheet, see http://developer.yahoo.com/yui/reset/
+*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+	margin:0;
 	padding:0;
-	background-color: #bfbfbf;
-	font: 80%/1.4  "Lucida Grande", Verdana, sans-serif;
-	color: #000;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img {
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul {
+	list-style:none;
+}
+caption,th {
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after {
+	content:'';
+}
+abbr,acronym { border:0;
 }
 
+body {
+  background:#e5e5e5;
+  font-family: "Helvetica Neue", helvetica, Arial, sans-serif;
+  color: #444;
+  padding: 0 20px;
+  font-style: normal;
+  font-size: 100%;
+  font-weight:300;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-style: normal;
+  font-weight: normal;
+}
+h1, .h1 {
+  font-size: 2em;
+  line-height: 1.5;
+  margin-top: 0.75em;
+}
+h2, .h2 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin-top: 1em;
+}
 
 
 
@@ -61,6 +114,11 @@ div.logbar {
 	font-weight: bold;
 }
 
+div.content {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
 div.mainform div.form_menu {
 	
 }
@@ -107,8 +165,10 @@ div.message {
 	border:4px solid #fff;
 	text-align: center;
 	
-	opacity: 0.9;
-	filter: alpha(opacity=90);
+	background-color: rgba(0, 0, 0, 0.8);
+	
+	-webkit-box-shadow: #111 0px 0px 30px;
+	box-shadow: #111 0px 0px 30px;
 }
 
 /* ***************************************
@@ -116,12 +176,13 @@ div.message {
 *************************************** */
 
 div.mainnav {
-	padding-top: 5px;
+	padding-top: 10px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid #000;
 	height: 30px;
 position:relative;
 top:-20px;
+	background-color: #f5f5f5;
 }
 
 div.mainnav ul {
@@ -136,6 +197,7 @@ div.mainnav li {
 	margin-left: 10px;
 	font-weight: bold;
 	padding: 5px;
+	background-color: #fff;
 }
 
 div.mainnav li a{
@@ -230,7 +292,7 @@ input[type="submit"] {
 .input-password,
 .input-number,
 .input-textarea {
-	width:100%;
+	width:97%;
 }
 
 .input-checkbox {

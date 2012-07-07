@@ -3,7 +3,7 @@
 	
 	$pages = array(
 		'domains' => 'Domains',
-		'users' => 'Users'
+		'users' => 'Multisite Admin Users'
 	);
 ?>
 <div class="navbar">
