@@ -11,8 +11,8 @@
 	    <link rel="stylesheet" href="css.css" type="text/css" />
 	    <script type="text/javascript" src="multi/vendor/h5f.min.js" /></script>
 	    <script type="text/javascript" src="multi/vendor/jquery-1.7.2.min.js" /></script>
-	    <script type="text/javascript" language="javascript">
             <meta name="robots" content="noindex" />
+	    <script type="text/javascript" language="javascript">
 	    <!--
 		    function showhide(id)
 		    {
