@@ -12,6 +12,7 @@
 	    <script type="text/javascript" src="multi/vendor/h5f.min.js" /></script>
 	    <script type="text/javascript" src="multi/vendor/jquery-1.7.2.min.js" /></script>
 	    <script type="text/javascript" language="javascript">
+            <meta name="robots" content="noindex" />
 	    <!--
 		    function showhide(id)
 		    {
