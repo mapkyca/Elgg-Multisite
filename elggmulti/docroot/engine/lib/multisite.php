@@ -24,7 +24,7 @@
 		public function __construct($url = '') 
 		{
 			if ($url) {
-				if (!$this->load($url))
+				if ($this->load($url) === false)
 					throw new Exception("Domain settings for $url could not be found");
 			}
 		}
