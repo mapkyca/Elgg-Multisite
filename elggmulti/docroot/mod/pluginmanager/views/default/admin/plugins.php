@@ -11,7 +11,9 @@
 elgg_load_js('lightbox');
 elgg_load_css('lightbox');
 
-elgg_generate_plugin_entities();
+// @todo this should occur in the controller code
+_elgg_generate_plugin_entities();
+
 $installed_plugins = elgg_get_plugins('any');
 $show_category = get_input('category', 'all');
 $sort = get_input('sort', 'priority');
@@ -64,13 +66,7 @@ foreach ($installed_plugins as $id => $plugin) {
 	if (isset($plugin_categories)) {
 		foreach ($plugin_categories as $category) {
 			if (!array_key_exists($category, $categories)) {
-				// if localization string not defined, fall back to original category string
-				$cat_raw_string = "admin:plugins:category:$category";
-				$cat_display_string = elgg_echo($cat_raw_string);
-				if ($cat_display_string == $cat_raw_string) {
-					$cat_display_string = ucwords($category);
-				}
-				$categories[$category] = $cat_display_string;
+				$categories[$category] = ElggPluginManifest::getFriendlyCategory($category);
 			}
 		}
 	}
@@ -141,9 +137,9 @@ $category_form = elgg_view_form('admin/plugins/filter', array(
 
 
 $sort_options = array(
-	'priority' => elgg_echo('admin:plugins:sort:priority'),
-	'alpha' => elgg_echo('admin:plugins:sort:alpha'),
-	'date' => elgg_echo('admin:plugins:sort:date'),
+	'priority' => elgg_echo('sort:priority'),
+	'alpha' => elgg_echo('sort:alpha'),
+	'date' => elgg_echo('sort:newest'),
 );
 // security - only want a defined option
 if (!array_key_exists($sort, $sort_options)) {
@@ -198,5 +194,6 @@ if ($show_category == 'all' && $sort == 'priority') {
 	$options['display_reordering'] = true;
 }
 echo elgg_view_entity_list($plugin_list, $options);
+
 ?>
 </div>

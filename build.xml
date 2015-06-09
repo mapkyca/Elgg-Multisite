@@ -2,13 +2,13 @@
 <project name="elggmulti" default="release" basedir=".">
 	
 	<!-- Package vars -->
-	<property name="elggmultiversion" value="1.8beta" />
+	<property name="elggmultiversion" value="1.11beta" />
 	
 	<!-- Deployment settings -->
 	<property name="output_release" value="releases/" />
 	
 	<!-- Base Elgg package -->
-	<property name="elggversion" value="1.8.16" />
+	<property name="elggversion" value="1.11.1" />
 	<property name="elggpackage" value="elgg/elgg-${elggversion}.zip" />
 	
 	<!-- Temporary directory -->
