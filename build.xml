@@ -53,4 +53,42 @@
 	    </antcall>
 	</target>
 
+	<target name="build-composer">
+		
+	
+		<!-- <unzip src="${elggpackage}" dest="${tmp}elggmultibase/" overwrite="yes" /> -->
+		<mkdir dir="${tmp}/elggcomposer"/>
+		<copy todir="${tmp}/elggcomposer" file="composer.json" overwrite="true"/>
+		<exec dir="${tmp}/elggcomposer" executable="composer">
+  			<arg line="update --no-dev"/>
+		</exec>
+		<exec dir="${tmp}/elggcomposer/vendor/elgg/elgg" executable="composer">
+  			<arg line="update --no-dev"/>
+		</exec>
+		
+ 		<mkdir dir="${output}docroot" />
+		<copy todir="${output}docroot/" overwrite="true">
+			<fileset dir="${tmp}/elggcomposer/vendor/elgg/elgg" />
+		</copy>
+		
+		<copy todir="${output}" overwrite="true">
+			<fileset dir="elggmulti/">
+				<exclude name=".cache/**"/>
+				<exclude name=".settings/**"/>
+				<exclude name=".svn/**"/>
+				<exclude name=".project"/>
+			</fileset>
+		</copy>
+	</target>
+	<target name="release-composer">
+
+		<tstamp/>
+		<antcall target="build-composer">
+			<param name="output" value="${output_release}multisiteelgg_composer/"/>
+			<param name="task" value="live"/>
+		</antcall>
+		
+		<zip destfile="releases/multisiteelgg-composer.zip" basedir="${output_release}" excludes="*.zip" />
+	</target>
+
 </project>

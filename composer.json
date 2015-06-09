@@ -1,0 +1,12 @@
+{
+    "name": "elgg/elggmulti",
+    "version": "1.11",
+    "description": "MP Multisite for Elgg allows you to run multiple separate Elgg sites off of the same install of the codebase, saving disk space and making administration a whole bunch easier.",
+    "license": "GPL-2.0",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "type": "project",
+    "require": {
+        "elgg/elgg":"1.11.1"
+    }
+}
