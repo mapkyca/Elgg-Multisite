@@ -3,7 +3,7 @@
     <name>Plugin Manager</name>
     <author>Marcus Povey</author>
     <description>Elgg Multisite plugin manager replacement.</description>
-    <version>1.8</version>
+    <version>1.11</version>
     <category>bundled</category>
     <category>multisite</category>
     <website>http://www.marcus-povey.co.uk</website>
@@ -12,6 +12,6 @@
     <activate_on_install>true</activate_on_install>
     <requires>
 	<type>elgg_release</type>
-	<version>1.8</version>
+	<version>1.11</version>
     </requires>
 </plugin_manifest>

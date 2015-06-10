@@ -29,7 +29,7 @@
 			}
 		}
 		
-		public function __get($name) { return $this->__attributes[$name]; }
+	public function __get($name) { return (array_key_exists($name, $this->__attributes))?$this->__attributes[$name]:''; }
 		public function __set($name, $value) { return $this->__attributes[$name] = $value; }
 		public function __isset($name) { return isset($this->__attributes[$name]); }
 		public function __unset($name) { unset($this->__attributes[$name]); }
@@ -292,7 +292,7 @@
 	{
 		global $CONFIG;
 		
-		if (!$CONFIG->elggmulti_link)
+		if (!array_key_exists('elggmulti_link', $CONFIG))
 		{ 
 			$CONFIG->elggmulti_link = mysql_connect($CONFIG->multisite->dbhost, $CONFIG->multisite->dbuser, $CONFIG->multisite->dbpass, true);
 			mysql_select_db($CONFIG->multisite->dbname, $CONFIG->elggmulti_link);
