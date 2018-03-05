@@ -1,0 +1,10 @@
+{
+    "name": "benwerd/bonita",
+    "description": "A simple PHP template manager with lofty ambitions.",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": ["start.php"]
+    }
+}
