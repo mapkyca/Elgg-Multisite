@@ -17,8 +17,8 @@ fi
 
 echo "Configuring apache..."
 a2enmod rewrite
-cp -f /home/vagrant/provisioning/000-default.conf /etc/apache2/sites-available/
-cp -f /home/vagrant/provisioning/multisite.conf /etc/apache2/sites-available/
+cp -f /home/vagrant/vagrant/000-default.conf /etc/apache2/sites-available/
+cp -f /home/vagrant/vagrant/multisite.conf /etc/apache2/sites-available/
 a2ensite multisite
 
 echo "Restarting apache..."
@@ -26,6 +26,7 @@ echo "Restarting apache..."
 
 
 echo "Installing elgg multisite schema..."
+echo "drop database elggmultisite" | mysql -u root
 echo "create database if not exists elggmultisite;" | mysql -u root
 echo "grant all on elggmultisite.* to 'elggmultisite'@'localhost' identified by 'elggmultisite';" | mysql -u root 
 cat /home/vagrant/multisite/schema/multisite_mysql.sql | mysql -u root elggmultisite
