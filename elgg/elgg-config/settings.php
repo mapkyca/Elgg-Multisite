@@ -28,9 +28,9 @@ $CONFIG->multisite = new stdClass;
  * Configure multisite support here, see
  * ELGGMULTI.txt for details.
  */
-$CONFIG->multisite->dbuser = 'your username';
-$CONFIG->multisite->dbpass = 'password';
-$CONFIG->multisite->dbhost = 'host';
+$CONFIG->multisite->dbuser = 'elggmultisite';
+$CONFIG->multisite->dbpass = 'elggmultisite';
+$CONFIG->multisite->dbhost = 'localhost';
 
 $CONFIG->multisite->dbname = 'elggmultisite';
 

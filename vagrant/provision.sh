@@ -23,3 +23,9 @@ a2ensite multisite
 
 echo "Restarting apache..."
 /etc/init.d/apache2 restart
+
+
+echo "Installing elgg multisite schema..."
+echo "create database if not exists elggmultisite;" | mysql -u root
+echo "grant all on elggmultisite.* to 'elggmultisite'@'localhost' identified by 'elggmultisite';" | mysql -u root 
+cat /home/vagrant/multisite/schema/multisite_mysql.sql | mysql -u root elggmultisite
