@@ -7,7 +7,7 @@ namespace ElggMultisite\Pages {
 	public function get() {
 	    
 	    if (\ElggMultisite\User::isLoggedIn())
-		$this->forward('/users/');
+		$this->forward('/domains/');
 
 	    $t = new \Bonita\Templates();
 

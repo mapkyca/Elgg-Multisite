@@ -12,7 +12,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <?php
 
-                    if (\ElggMultisite\Site::site()->isLoggedIn()) {
+                    if (\ElggMultisite\User::isLoggedIn()) {
 
                         echo $this->draw('shell/toolbar/logged-in');
 
