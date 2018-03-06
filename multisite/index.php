@@ -25,4 +25,6 @@ require_once(dirname(__FILE__) . '/vendor/torophp/src/Toro.php');
     'session/login/?' => '\ElggMultisite\Pages\Session\Login',
     'session/logout/?' => '\ElggMultisite\Pages\Session\Logout',
     'session/register/?' => '\ElggMultisite\Pages\Session\Register',
+    'session/setpassword/?' => '\ElggMultisite\Pages\Session\SetPassword',
+    'session/deleteuser/?' => '\ElggMultisite\Pages\Session\Delete',
 ]);
