@@ -23,7 +23,7 @@ namespace ElggMultisite\Pages\Session {
 	    }
 	    
 	    \ElggMultisite\Messages::addMessage('Sorry, that user could not be registered');
-	    $this->forward('/');
+	    $this->forward('/users/');
 	}
 
     }
