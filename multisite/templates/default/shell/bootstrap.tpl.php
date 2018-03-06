@@ -5,5 +5,5 @@
     href="/vendor/bootstrap/css/bootstrap.min.css"
     rel="stylesheet"/>
 <script
-    src="/vendor/js/bootstrap.min.js"></script>
+    src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
