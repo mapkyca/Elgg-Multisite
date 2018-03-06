@@ -19,9 +19,11 @@ namespace ElggMultisite\Pages\Session {
 		    $this->forward('/');
 
 	    } catch (\Exception $e) {
-		
+		\ElggMultisite\Messages::addMessage($e->getMessage());
 	    }
-	    throw new \Exception('Sorry, that user could not be registered');
+	    
+	    \ElggMultisite\Messages::addMessage('Sorry, that user could not be registered');
+	    $this->forward('/');
 	}
 
     }
