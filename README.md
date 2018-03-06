@@ -37,7 +37,7 @@ If you want to start playing with this quickly, you can run the vagrant build.
 * Modify your hosts
   * Set "elgg-multisite" to point to 192.168.33.35
   * Set "whatever.multi", "whatever2.multi", etc...
-* vagrant up
+* ```vagrant up```
 * Go to http://elgg-multisite and set up your first admin user
   * Log in admin
   * Create your whatever.multi domain
