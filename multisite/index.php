@@ -81,6 +81,7 @@ try {
     'users/?' => '\ElggMultisite\Pages\Users',
     'domains/?' => '\ElggMultisite\Pages\Domains',
     'domains/add/?' => '\ElggMultisite\Pages\Domains\Add',
+    'domains/edit/?' => '\ElggMultisite\Pages\Domains\Edit',
     'session/login/?' => '\ElggMultisite\Pages\Session\Login',
     'session/logout/?' => '\ElggMultisite\Pages\Session\Logout',
     'session/register/?' => '\ElggMultisite\Pages\Session\Register',
