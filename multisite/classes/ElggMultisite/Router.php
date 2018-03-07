@@ -29,7 +29,7 @@ namespace ElggMultisite {
 		}
 	    }
 
-	    return new \stdClass();
+	    return false;
 	}
 
 	/**
@@ -40,7 +40,7 @@ namespace ElggMultisite {
 	 */
 	public static function toObj($row) {
 	    if (
-		    (!($row instanceof stdClass)) ||
+		    (!($row instanceof \stdClass)) ||
 		    (!$row->id) ||
 		    (!$row->class)
 	    )
@@ -57,7 +57,7 @@ namespace ElggMultisite {
 		$object->load($row->domain);
 
 		return $object;
-	    }
+	    } else throw new \Exception($class);
 
 	    return false;
 	}
