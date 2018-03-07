@@ -21,7 +21,7 @@ namespace ElggMultisite {
 		$url = $_SERVER['SERVER_NAME'];
 
 	    if ($row = DB::execute("select * from domains where domain = :url limit 1", [':url' => $url])) {
-		if ($obj = static::toObj($row)) {
+		if ($obj = static::toObj($row[0])) {
 		    if (!$obj->isSiteAccessible())
 			return false;
 
