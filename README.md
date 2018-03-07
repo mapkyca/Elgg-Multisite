@@ -38,6 +38,7 @@ If you want an example of how to set it up, take a look at the configuration of 
 * Modify the ```$CONFIG->multisite->db_*``` configuration in elgg/elgg-config/settings.php with these database settings
 * Configure a PRIVATE domain to use ```/multisite/``` as a docroot
 * Configure a PUBLIC wildcard domain to use ```/elgg/``` docroot
+* Make sure ```/data/``` is writable by your webserver
 * Visit your private domain & set up your first user and user domains
 
 
@@ -49,6 +50,7 @@ If you want to start playing with this quickly, you can run the vagrant build.
 * Modify your hosts
   * Set "elgg-multisite" to point to 192.168.33.35
   * Set "whatever.multi", "whatever2.multi", etc...
+* Make sure ```/data/``` is writable by your webserver
 * ```vagrant up```
 * Go to http://elgg-multisite and set up your first admin user
   * Log in admin
