@@ -25,7 +25,7 @@ namespace ElggMultisite {
 	    
 	    $statement = self::db()->prepare($query);
 	    if ($statement->execute($values)) {
-		if ($row = $statement->fetch(\PDO::FETCH_OBJ)) {
+		if ($row = $statement->fetchAll(\PDO::FETCH_OBJ)) {
 		    return $row;
 		}
 	    }
