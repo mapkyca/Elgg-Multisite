@@ -72,7 +72,7 @@ $site = ElggMultisite\Site::site();
 try {
     $site->checkInstall();
 } catch (Exception $ex) {
-    ElggMultisite\Messages::addMessage($ex);
+    ElggMultisite\Messages::addMessage($ex->getMessage());
 }
 
 
