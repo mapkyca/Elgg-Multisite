@@ -32,7 +32,10 @@ If you want an example of how to set it up, take a look at the configuration of 
 ### Basic Setup
 
 * Create a database and install ```multisite/schema/multisite_mysql.sql```
-* Modify the ```$CONFIG->multisite->db_*``` configuration in elgg/elgg-config/settings.php
+* Create a database user with
+  * The ability to create databases
+  * The ability to grant privileges on those databases
+* Modify the ```$CONFIG->multisite->db_*``` configuration in elgg/elgg-config/settings.php with these database settings
 * Configure a PRIVATE domain to use ```/multisite/``` as a docroot
 * Configure a PUBLIC wildcard domain to use ```/elgg/``` docroot
 * Visit your private domain & set up your first user and user domains
