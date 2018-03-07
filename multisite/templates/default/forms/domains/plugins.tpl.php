@@ -2,12 +2,14 @@
 	static $plugins;
 	
 	if (!$plugins)
-		$plugins = ElggMultisite\Domain::getInstalledPlugins();
+		$plugins = ElggMultisite\Site::site()->getInstalledPlugins();
 
+	$domain = $vars['domain'];
 	if ($domain instanceof \ElggMultisite\Domain) 
-		$activated = $domain->getActivatedPlugins();
+		$activated = ElggMultisite\Site::site()->getActivatedPlugins($domain->getID());
 	else
 		$activated = $plugins;
+
 
 ?>
 <div class="card">
