@@ -43,11 +43,11 @@ set_exception_handler(function ($exception) {
     }
 
     http_response_code(500);
-    error_log($e->getMessage());
+    error_log($exception->getMessage());
     
     echo "<h1>Elgg Multisite experienced a problem</h1>";
     echo "<p>Sorry, we experienced a problem with this page and couldn't continue. The technical details are as follows:</p>";
-    echo "<pre>".$e->getMessage()."</pre>";
+    echo "<pre>".$exception."</pre>";
 
 });
 
