@@ -26,7 +26,7 @@ $users = \ElggMultisite\User::getUsers();
 						<label>Password again: <input class="password input-password form-control" type="password" name="password2" value="" /> </label>
 					</div>
 					<input type="hidden" name="username" value="<?php echo $user->username; ?>" />
-					<input class="submit" type="submit" name="Save" value="Save">
+					<input class="submit" type="submit" name="Save" value="Change password...">
 				</form>
 				
 			
