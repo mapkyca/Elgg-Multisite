@@ -29,6 +29,15 @@ as its docroot.
 
 If you want an example of how to set it up, take a look at the configuration of the vagrant build.
 
+### Basic Setup
+
+* Create a database and install ```multisite/schema/multisite_mysql.sql```
+* Modify the ```$CONFIG->multisite->db_*``` configuration in elgg/elgg-config/settings.php
+* Configure a PRIVATE domain to use ```/multisite/``` as a docroot
+* Configure a PUBLIC wildcard domain to use ```/elgg/``` docroot
+* Visit your private domain & set up your first user and user domains
+
+
 ## Vagrant build
 
 If you want to start playing with this quickly, you can run the vagrant build.
