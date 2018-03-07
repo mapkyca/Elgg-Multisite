@@ -73,6 +73,7 @@ require_once(dirname(__FILE__) . '/vendor/torophp/src/Toro.php');
     '/?' => '\ElggMultisite\Pages\LoggedOut',
     'users/?' => '\ElggMultisite\Pages\Users',
     'domains/?' => '\ElggMultisite\Pages\Domains',
+    'domains/add/?' => '\ElggMultisite\Pages\Domains\Add',
     'session/login/?' => '\ElggMultisite\Pages\Session\Login',
     'session/logout/?' => '\ElggMultisite\Pages\Session\Logout',
     'session/register/?' => '\ElggMultisite\Pages\Session\Register',
