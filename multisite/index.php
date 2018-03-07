@@ -1,5 +1,40 @@
 <?php
 
+register_shutdown_function(function () {
+    $error = error_get_last();
+    if ($error["type"] == E_ERROR) {
+
+	try {
+	    ob_clean();
+	} catch (ErrorException $e) {
+	    
+	}
+
+	http_response_code(500);
+
+	if (!empty($_SERVER['SERVER_NAME'])) {
+	    $server_name = $_SERVER['SERVER_NAME'];
+	} else {
+	    $server_name = '';
+	}
+	if (!empty($_SERVER['REQUEST_URI'])) {
+	    $request_uri = $_SERVER['REQUEST_URI'];
+	} else {
+	    $request_uri = '';
+	}
+
+	$error_message = "Fatal Error: {$error['file']}:{$error['line']} - \"{$error['message']}\", on page {$server_name}{$request_uri}";
+
+	echo "<h1>Elgg Multisite experienced a problem</h1>";
+	echo "<p>Sorry, we experienced a problem with this page and couldn't continue. The technical details are as follows:</p>";
+	echo "<pre>$error_message</pre>";
+
+	error_log($error_message);
+
+	exit;
+    }
+});
+
 require_once(dirname(dirname(__FILE__)) . '/elgg/elgg-config/settings.php');
 session_start();
 
