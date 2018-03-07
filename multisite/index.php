@@ -68,6 +68,13 @@ require_once(dirname(__FILE__) . '/vendor/bonita/start.php');
 
 require_once(dirname(__FILE__) . '/vendor/torophp/src/Toro.php');
 
+$site = ElggMultisite\Site::site();
+try {
+    $site->checkInstall();
+} catch (Exception $ex) {
+    ElggMultisite\Messages::addMessage($ex);
+}
+
 
 \ElggMultisite\PageHandler::serve([
     '/?' => '\ElggMultisite\Pages\LoggedOut',
