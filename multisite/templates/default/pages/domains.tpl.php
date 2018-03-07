@@ -18,53 +18,68 @@
 			$url = $domain->getDomain();
 		
 			$d = strtolower(get_class($domain));
+			
+			ob_start();
+			
+			try {
 		?>
 		<div class="domain<?php if ($domain->enabled=='no') echo " disabled"; ?><?php if (!$domain->isSiteAccessible()) echo " inaccessible"; ?>">
-			<a href="#" onclick="showhide('disp_<?php echo $domain->getID(); ?>');"><b><?php echo $url; ?></b> (<?php echo $label; ?>) </a>
-			<div id="disp_<?php echo $domain->getID(); ?>" style="display: none;">
+			<a href="#disp_<?php echo $domain->getID(); ?>" data-toggle="collapse"><b><?php echo $url; ?></b> (<?php echo $label; ?>) </a>
+			<div id="disp_<?php echo $domain->getID(); ?>" class="collapse">
 				<div class="domain_display">
 				<?= $this->__(['domain' => $domain])->draw('domains/Domain'); ?>
 				</div>
 			</div>
 			<div class="domain_strap">
-				<a href="multi/actions/deletedomain.php?domain_id=<?php echo $domain->getID(); ?>">Delete</a> <?php
+				<a href="/domains/delete?domain_id=<?php echo $domain->getID(); ?>">Delete</a> <?php
 				if ($domain->enabled=='no')
 				{
 					?>
-					:: <a href="multi/actions/enabledomain.php?domain_id=<?php echo $domain->getID(); ?>">Enable</a>
+					:: <a href="/domains/enable?domain_id=<?php echo $domain->getID(); ?>">Enable</a>
 					<?php
 				}
 				else
 				{
 					?>
-					:: <a href="multi/actions/disabledomain.php?domain_id=<?php echo $domain->getID(); ?>">Disable</a>
+					:: <a href="/domains/disable?domain_id=<?php echo $domain->getID(); ?>">Disable</a>
 					<?php
 				}
+				
+				?>
+				:: <a href="http://////<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a> 
+				<?php
+				
+				/*
 				if ($domain->isDbInstalled()==0)
 				{
 					?>
-					:: <a href="http://<?php echo $domain->getDomain(); ?>/install.php" target="_blank">Install</a>
-					<?php
+					:: <a href="http:////////<?php echo $domain->getDomain(); ?>/install.php" target="_blank">Install</a>
+					//<?php
 				}
 				else
 				{
 					?>
-					:: <a href="http://<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a>
-					<?php
+					:: <a href="http:////////<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a>
+					//<?php
 				}
 				
 				if (($domain->getDBVersion()>0) && ($domain->getDBVersion()<$version))
 				{
 					?>
-					:: <a href="http://<?php echo $domain->getDomain(); ?>/upgrade.php" target="_blank">Upgrade DB</a>
+					:: <a href="http://////<?php echo $domain->getDomain(); ?>/upgrade.php" target="_blank">Upgrade DB</a>
 					<?php
 				}
-				
+				*/
 				?>
 			</div>
 		</div>	
 		<?php
-			
+		    echo ob_get_clean();
+		    } catch (\Exception $e) {
+			ob_get_clean();
+		    }
+
+		    
 		}
 	}
 ?>	
@@ -76,6 +91,7 @@
     <div class="card-body">
 	<?php
 
+	unset($this->vars['domain']);
 		if ($forms)
 		{
 			foreach ($forms as $domain => $label) {	
