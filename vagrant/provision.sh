@@ -27,6 +27,12 @@ echo "Restarting apache..."
 
 echo "Installing elgg multisite schema..."
 echo "drop database elggmultisite" | mysql -u root
+echo "drop user 'elggmultisite'@'localhost'" | mysql -u root
 echo "create database if not exists elggmultisite;" | mysql -u root
-echo "grant all on elggmultisite.* to 'elggmultisite'@'localhost' identified by 'elggmultisite';" | mysql -u root 
+echo "create user 'elggmultisite'@'localhost' identified by 'elggmultisite';" | mysql -u root 
+echo "grant all privileges on * . * to  'elggmultisite'@'localhost' with grant option;" | mysql -u root 
+echo "grant all privileges on * . * to  'elggmultisite'@'%' with grant option;" | mysql -u root 
+echo "flush privileges;" | mysql -u root 
+#echo "grant all on elggmultisite.* to elggmultisite@localhost identified by 'elggmultisite' with grant option;" | mysql -u root 
+#echo "grant all on elggmultisite.* to elggmultisite@'%' identified by 'elggmultisite' with grant option;" | mysql -u root 
 cat /home/vagrant/multisite/schema/multisite_mysql.sql | mysql -u root elggmultisite
