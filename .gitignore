@@ -3,3 +3,4 @@
 .AppleDouble
 .vagrant
 *.log
+/data/*
