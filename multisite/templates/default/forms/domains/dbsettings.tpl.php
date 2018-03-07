@@ -1,6 +1,8 @@
 <?php
 global $CONFIG;
 $domain = $vars['domain'];
+
+/*
 ?>
 
 <div class="card">
@@ -30,4 +32,4 @@ $domain = $vars['domain'];
 	    </div>
     </div>
 </div>
-<br />
+<br /> */ ?>
