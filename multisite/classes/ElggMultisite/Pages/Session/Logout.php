@@ -6,6 +6,9 @@ namespace ElggMultisite\Pages\Session {
 	
 	public function get() {
 	    
+	    \ElggMultisite\User::logout();
+	    
+	    $this->forward('/');
 	}
 
 	public function post() {
