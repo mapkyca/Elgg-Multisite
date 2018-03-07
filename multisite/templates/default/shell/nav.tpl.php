@@ -6,10 +6,8 @@
             <a class="navbar-brand" tabindex="1" href="<?= \ElggMultisite\Site::site()->getWWWRoot(); ?>">Elgg Multisite</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-collapse">
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav justify-content-end">
                 <?php
 
                     if (\ElggMultisite\User::isLoggedIn()) {
@@ -25,6 +23,5 @@
                 ?>
             </ul>
 
-        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
