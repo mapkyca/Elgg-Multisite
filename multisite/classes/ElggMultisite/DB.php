@@ -67,7 +67,17 @@ namespace ElggMultisite {
 
 	    $statement = self::db()->prepare($query);
 	    if ($statement->execute($values)) {
-		return self::db()->lastInsertId();
+		return $statement->rowCount();
+	    }
+
+	    return false;
+	}
+	
+	public static function update($query, $values = []) {
+
+	    $statement = self::db()->prepare($query);
+	    if ($statement->execute($values)) {
+		return $statement->rowCount();
 	    }
 
 	    return false;

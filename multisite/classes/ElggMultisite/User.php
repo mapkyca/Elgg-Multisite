@@ -10,7 +10,7 @@ namespace ElggMultisite {
 	    $password2 = trim($password2);
 	    
 	    if (strcmp($password, $password2) != 0)
-		throw new \Exception('Passwords are not the same');
+		throw new \Exception('Passwords are not the same ' . $password . ' ' . $password2);
 
 	    if (strlen($password) < 5)
 		throw new \Exception('Passwords are too short');
@@ -18,7 +18,7 @@ namespace ElggMultisite {
 	    $salt = substr(md5(rand()), 0, 8);
 	    $password = hash_hmac('md5', $password, $salt);
 
-	    if ($result = \ElggMultisite\DB::insert('UPDATE users SET password = :password, salt = :salt WHERE username= :username', [':username' => $username, ':password' => $password, ':salt' => $salt])) {
+	    if ($result = \ElggMultisite\DB::update('UPDATE users SET password = :password, salt = :salt WHERE username= :username', [':username' => $username, ':password' => $password, ':salt' => $salt])) {
 		return $result;
 	    }
 
