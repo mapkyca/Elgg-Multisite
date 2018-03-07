@@ -105,7 +105,8 @@ namespace ElggMultisite {
 
 	public function isDbInstalled() {
 	    
-	    if (DB::execute("SHOW tables like ':prefix%'", [':prefix' => $this->dbprefix])) {
+	    if ($result = DB::execute("SHOW tables like {$this->dbname}.:prefix%", [':prefix' => $this->dbprefix])) {
+		print_r($result); die();
 		return true;
 	    }
 	    
@@ -114,8 +115,8 @@ namespace ElggMultisite {
 
 	public function getDBVersion() {
 	    
-	    if ($result = DB::execute("SELECT * FROM {$this->dbprefix}datalists WHERE name='version'"))
-		return $result->value;
+	    if ($result = DB::execute("SELECT * FROM {$this->dbname}.{$this->dbprefix}datalists WHERE name='version'"))
+		return $result[0]->value;
 
 	    return false;
 	}
@@ -130,23 +131,22 @@ namespace ElggMultisite {
 	
 	protected function toggle_plugin($plugin, $enable = true, $site_id = 1) {
 	    
-
-	    $string = DB::execute("SELECT * FROM {$this->dbprefix}metastrings WHERE string='enabled_plugins'");
+	    $string = DB::execute("SELECT * FROM {$this->dbname}.{$this->dbprefix}metastrings WHERE string='enabled_plugins'");
 	    if (!$string) {
 		
-		$enabled_id = DB::insert("INSERT into {$this->dbprefix}metastrings (string) VALUES ('enabled_plugins')");
+		$enabled_id = DB::insert("INSERT into {$this->dbname}.{$this->dbprefix}metastrings (string) VALUES ('enabled_plugins')");
 		
 	    } else {
 
 		$enabled_id = $string->id;
 	    }
 
-	    $result = DB::execute("SELECT * FROM {$this->dbprefix}metastrings WHERE string=:plugin", [':plugin' => $plugin]);
+	    $result = DB::execute("SELECT * FROM {$this->dbname}.{$this->dbprefix}metastrings WHERE string=:plugin", [':plugin' => $plugin]);
 	    if (!$result)
 		return false;
 	    $string = $result[0];
 	    if (!$string) {
-		$plugin_id = DB::insert("INSERT into {$this->dbprefix}metastrings (string) VALUES (:plugin)", [':plugin' => $plugin]);
+		$plugin_id = DB::insert("INSERT into {$this->dbname}.{$this->dbprefix}metastrings (string) VALUES (:plugin)", [':plugin' => $plugin]);
 	    } else {
 		$plugin_id = $string->id;
 	    }
@@ -159,40 +159,12 @@ namespace ElggMultisite {
 
 		// TODO : Enable
 	    } else {
-		DB::execute("DELETE from {$this->dbprefix}metadata WHERE entity_guid=:site_id and name_id=:name_id and value_id=:value_id", [':site_id' => $site_id, ':name_id' => $enabled_id, ':value_id' => $plugin_id]);
+		DB::execute("DELETE from {$this->dbname}.{$this->dbprefix}metadata WHERE entity_guid=:site_id and name_id=:name_id and value_id=:value_id", [':site_id' => $site_id, ':name_id' => $enabled_id, ':value_id' => $plugin_id]);
 	    }
 
 	    return true;
 	}
 	
-	/**
-	 * Get plugins which have been activated for a given domain.
-	 *
-	 * @param int $domain_id
-	 * @return array|false
-	 */
-	function getActivatedPlugins()
-	{
-	    $domain_id = $this->id;
-	    
-	    if (!$domain_id)
-	    {
-		$router = new Router();
-		$result = $router->route();
-
-		$domain_id = $result->getID();
-	    }
-
-	    $domain_id = (int)$domain_id;
-
-	    $result = DB::execute("SELECT * from domains_activated_plugins where domain_id=:domain_id", [':domain_id' => $domain_id]);
-	    $resultarray = array();
-	    foreach ($result as $r)
-		$resultarray[] = $r->plugin;
-
-	    return $resultarray;
-	}
-
 	/**
 	 * Save object to database.
 	 */
@@ -205,10 +177,8 @@ namespace ElggMultisite {
 	    } else
 		$result = DB::execute("UPDATE domains set domain=:url, class=:class WHERE id=:id", [':url' => $url, ':class' => $class, ':id' => $this->id]);
 
-	    if (!$result)
-		return false;
 
-	    DB::execute("DELETE from domains_metadata where domain_id=:domain_id", [':domain_id' => $this->id]);
+	    DB::delete("DELETE from domains_metadata where domain_id=:domain_id", [':domain_id' => $this->id]);
 
 	    foreach ($this->attributes as $key => $value) {
 		
@@ -218,9 +188,11 @@ namespace ElggMultisite {
 
 		// Save metadata
 		foreach ($value as $meta) {
-		    DB::insert("INSERT into domains_metadata (domain_id, name,value) VALUES (:domain_id, :name, :value)", [':domain_id' => $this->id, ':name' => $key, ':value' => $meta]);
+		    DB::insert("INSERT into domains_metadata (domain_id, name, value) VALUES (:domain_id, :name, :value)", [':domain_id' => $this->id, ':name' => $key, ':value' => $meta]);
 		}
 	    }
+	    
+	    return $this->id;
 	}
 
 	/**
@@ -238,7 +210,7 @@ namespace ElggMultisite {
 	    $this->id = $row->id;
 
 	    $meta = DB::execute("SELECT * from domains_metadata where domain_id = :domain_id", [':domain_id' => $row->id]);
-	    if ($meta) {
+	    if ($meta) { 
 		foreach ($meta as $md) {
 		    $name = $md->name;
 		    $value = $md->value;
@@ -261,7 +233,11 @@ namespace ElggMultisite {
 	public static function getDomains() {
 	    if ($rows = DB::execute('SELECT * from domains')) {
 		foreach ($rows as $key => $value) {
-		    $rows[$key] = Router::toObj($value);
+		    try {
+			$rows[$key] = Router::toObj($value);
+		    } catch (\Exception $e) {
+			unset($rows[$key]);
+		    }
 		}
 		
 		return $rows;
@@ -279,31 +255,106 @@ namespace ElggMultisite {
 	    ];
 	}
 	
-	/**
-	 * Return a list of all installed plugins.
-	 *
-	 */
-	public static function getInstalledPlugins()
-	{
-	    $plugins = array();
+	
+	public static function addDomain($url, $dbsettings = [], $plugins = [], $class = "ElggMultisite\\Domain") {
+	    
+	    global $CONFIG;
+	    
+	    if (User::isLoggedIn()) {
+		$domain = false;
+			
+		switch ($class)
+		{
+			case 'ElggMultisite\\Domain' :
+			default:
+			    $domain = new Domain();
+		}
+			
+		if ($domain) {
 
-	    $path = dirname(dirname(dirname(dirname(__FILE__)))) . '/elgg/mod/';
+		    // Common url settings
+		    $domain->setDomain($url);
 
-	    if ($handle = opendir($path)) {
-
-		    while ($mod = readdir($handle)) {
-
-			    if (!in_array($mod,array('.','..','.svn','CVS', '.git')) && is_dir($path . "/" . $mod)) {
-				    if ($mod!='pluginmanager') // hide plugin manager
-					    $plugins[] = $mod;
-			    }
-
+		    // Common db settings
+		    $domain->dbname = $dbsettings['dbname'];
+		    if (!$domain->dbname) {
+			
+			$url = preg_replace("/[^a-zA-Z0-9\s]/", "_", $url);
+			$domain->dbname= $url;
+			
 		    }
+
+		    $domain->dbuser = $dbsettings['dbuser'];
+		    if (!$domain->dbuser)
+			$domain->dbuser=$CONFIG->multisite->dbuser;
+					
+		    $domain->dbpass = $dbsettings['dbpass'];
+		    if (!$domain->dbpass)
+			$domain->dbpass=$CONFIG->multisite->dbpass;
+					
+		    $domain->dbhost = $dbsettings['dbhost'];
+		    if (!$domain->dbhost)
+			$domain->dbhost=$CONFIG->multisite->dbhost;
+					
+		    $domain->dbprefix = $dbsettings['dbprefix'];
+		    if (!$domain->dbprefix)
+			$domain->dbprefix = 'elgg';
+				
+		    $domain->dataroot = dirname(dirname(dirname(dirname(__FILE__)))) . "/data/$url/"; 
+		    @mkdir($domain->dataroot, 0755);
+
+		    $dbname = $domain->dbname;
+		    $dbuser = $domain->dbuser;
+		    $dbpass = $domain->dbpass;
+		    $dbhost = $domain->dbhost;
+					
+		    if (!DB::create($dbname))
+			throw new \Exception("Could not create database $dbname@$dbhost, check permissions and check that it doesn't already exist!");
+					
+		    if (!DB::grant("grant all privileges on `$dbname`.* to `$dbuser`@`$dbhost` identified by :dbpass", [':dbpass' => $dbpass]))
+			throw new \Exception("Unable to grant access (all) to `$dbuser`@`$dbhost` on $dbname, please do this manually or you will likely have problems.");
+		    
+		    // Install elgg database
+		    DB::source(
+			dirname(dirname(dirname(dirname(__FILE__)))) . '/elgg/vendor/elgg/elgg/engine/schema/mysql.sql',
+			$domain->dbprefix,
+			$dbname
+		    );
+				
+		    // Save
+		    $domain_id = null;
+		    if ($domain_id = $domain->save())
+			Messages::addMessage('New domain created');
+					
+					
+		    // Activate/deactivate plugins
+		    $activated = Site::site()->getInstalledPlugins();
+		    foreach ($activated as $plugin)
+		    {
+			Site::site()->setActivatedPlugins($domain_id, $plugin); // Active plugin globally
+			
+			// Activate on the domain
+//			if (in_array($plugin, $plugins)) {
+//			    $domain->toggle_plugin ($plugin);
+//			} else {
+//			    $domain->toggle_plugin($plugin, false);
+//			}
+		    }
+		    
+		}
 	    }
-
-	    sort($plugins);
-
-	    return $plugins;
+	    
+	}
+	
+	/**
+	 * Get a given domain by id
+	 * @param type $id
+	 * @return \ElggMultisite\Domain
+	 */
+	public static function getByID($id) {
+	    if ($result = DB::execute("SELECT * from domains where id = :id". [':id' => $id])){
+		return Router::toObj($result[0]);
+	    }
 	}
 
     }
