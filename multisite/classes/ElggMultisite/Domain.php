@@ -3,8 +3,8 @@
 namespace ElggMultisite {
 
     class Domain implements
-	Iterator, // Override foreach behaviour 
-	ArrayAccess // Override for array access 
+	\Iterator, // Override foreach behaviour 
+	\ArrayAccess // Override for array access 
     {
 
 	private $attributes = array();
@@ -127,21 +127,6 @@ namespace ElggMultisite {
 	public function enable_plugin($plugin) {
 	    return $this->toggle_plugin($plugin, true);
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	protected function toggle_plugin($plugin, $enable = true, $site_id = 1) {
 	    
@@ -149,30 +134,20 @@ namespace ElggMultisite {
 	    $string = DB::execute("SELECT * FROM {$this->dbprefix}metastrings WHERE string='enabled_plugins'");
 	    if (!$string) {
 		
-		
-		
-		
-		
-		mysql_query("INSERT into {$this->dbprefix}metastrings (string) VALUES ('enabled_plugins')");
-		$enabled_id = mysql_insert_id($link);
-		
-		
-		
+		$enabled_id = DB::insert("INSERT into {$this->dbprefix}metastrings (string) VALUES ('enabled_plugins')");
 		
 	    } else {
 
 		$enabled_id = $string->id;
 	    }
 
-	    $result = mysql_query("SELECT * FROM {$this->dbprefix}metastrings WHERE string='$plugin'", $link);
+	    $result = DB::execute("SELECT * FROM {$this->dbprefix}metastrings WHERE string=:plugin", [':plugin' => $plugin]);
 	    if (!$result)
 		return false;
-	    $string = mysql_fetch_object($result);
+	    $string = $result[0];
 	    if (!$string) {
-		mysql_query("INSERT into {$this->dbprefix}metastrings (string) VALUES ('$plugin')");
-		$plugin_id = mysql_insert_id($link);
+		$plugin_id = DB::insert("INSERT into {$this->dbprefix}metastrings (string) VALUES (:plugin)", [':plugin' => $plugin]);
 	    } else {
-
 		$plugin_id = $string->id;
 	    }
 
@@ -184,12 +159,38 @@ namespace ElggMultisite {
 
 		// TODO : Enable
 	    } else {
-		$query = "DELETE from {$this->dbprefix}metadata WHERE entity_guid=$site_id and name_id=$enabled_id and value_id=$plugin_id";
-
-		mysql_query($query);
+		DB::execute("DELETE from {$this->dbprefix}metadata WHERE entity_guid=:site_id and name_id=:name_id and value_id=:value_id", [':site_id' => $site_id, ':name_id' => $enabled_id, ':value_id' => $plugin_id]);
 	    }
 
 	    return true;
+	}
+	
+	/**
+	 * Get plugins which have been activated for a given domain.
+	 *
+	 * @param int $domain_id
+	 * @return array|false
+	 */
+	function getActivatedPlugins()
+	{
+	    $domain_id = $this->id;
+	    
+	    if (!$domain_id)
+	    {
+		$router = new Router();
+		$result = $router->route();
+
+		$domain_id = $result->getID();
+	    }
+
+	    $domain_id = (int)$domain_id;
+
+	    $result = DB::execute("SELECT * from domains_activated_plugins where domain_id=:domain_id", [':domain_id' => $domain_id]);
+	    $resultarray = array();
+	    foreach ($result as $r)
+		$resultarray[] = $r->plugin;
+
+	    return $resultarray;
 	}
 
 	/**
@@ -197,32 +198,28 @@ namespace ElggMultisite {
 	 */
 	public function save() {
 	    $class = get_class($this);
-	    $url = mysql_real_escape_string($this->getDomain());
+	    $url = $this->getDomain();
 
-	    $dblink = elggmulti_db_connect();
 	    if (!$this->id) {
-		$result = elggmulti_execute_query("INSERT into domains (domain, class) VALUES ('$url', '$class')");
-		$this->id = mysql_insert_id($dblink);
+		$this->id = DB::insert("INSERT into domains (domain, class) VALUES (:url, :class)", [':url' => $url, ':class' => $class]);
 	    } else
-		$result = elggmulti_execute_query("UPDATE domains set domain='$url', class='$class' WHERE id={$this->id}");
+		$result = DB::execute("UPDATE domains set domain=:url, class=:class WHERE id=:id", [':url' => $url, ':class' => $class, ':id' => $this->id]);
 
 	    if (!$result)
 		return false;
 
-
-	    elggmulti_execute_query("DELETE from domains_metadata where domain_id='{$this->id}'");
+	    DB::execute("DELETE from domains_metadata where domain_id=:domain_id", [':domain_id' => $this->id]);
 
 	    foreach ($this->attributes as $key => $value) {
-		// Sanitise string
-		$key = mysql_real_escape_string($key);
-
+		
 		// Convert non-array to array 
 		if (!is_array($value))
 		    $value = array($value);
 
 		// Save metadata
-		foreach ($value as $meta)
-		    elggmulti_execute_query("INSERT into domains_metadata (domain_id,name,value) VALUES ({$this->id}, '$key', '" . mysql_real_escape_string($meta) . "')");
+		foreach ($value as $meta) {
+		    DB::insert("INSERT into domains_metadata (domain_id, name,value) VALUES (:domain_id, :name, :value)", [':domain_id' => $this->id, ':name' => $key, ':value' => $meta]);
+		}
 	    }
 	}
 
@@ -232,14 +229,15 @@ namespace ElggMultisite {
 	 * @param string $url URL to load
 	 */
 	public function load($url) {
-	    $row = elggmulti_getdata_row("SELECT * from domains WHERE domain='$url' LIMIT 1");
+	    $row = DB::execute("SELECT * from domains WHERE domain=:url LIMIT 1", [':url' => $url]);
 	    if (!$row)
 		return false;
 
+	    $row = $row[0];
 	    $this->domain = $row->domain;
 	    $this->id = $row->id;
 
-	    $meta = elggmulti_getdata("SELECT * from domains_metadata where domain_id = {$row->id}");
+	    $meta = DB::execute("SELECT * from domains_metadata where domain_id = :domain_id", [':domain_id' => $row->id]);
 	    if ($meta) {
 		foreach ($meta as $md) {
 		    $name = $md->name;
@@ -257,25 +255,18 @@ namespace ElggMultisite {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Return all domains
+	 */
+	public static function getDomains() {
+	    if ($rows = DB::execute('SELECT * from domains')) {
+		foreach ($rows as $key => $value) {
+		    $rows[$key] = Router::toObj($value);
+		}
+		
+		return $rows;
+	    }
+	}
 	
 	/**
 	 * Return available multisite domains.
@@ -283,9 +274,36 @@ namespace ElggMultisite {
 	 * @return array
 	 */
 	public static function getDomainTypes() {
-	    return array(
-		'MultisiteDomain' => 'Elgg domain',
-	    );
+	    return [
+		'Domain' => 'Elgg domain',
+	    ];
+	}
+	
+	/**
+	 * Return a list of all installed plugins.
+	 *
+	 */
+	public static function getInstalledPlugins()
+	{
+	    $plugins = array();
+
+	    $path = dirname(dirname(dirname(dirname(__FILE__)))) . '/elgg/mod/';
+
+	    if ($handle = opendir($path)) {
+
+		    while ($mod = readdir($handle)) {
+
+			    if (!in_array($mod,array('.','..','.svn','CVS', '.git')) && is_dir($path . "/" . $mod)) {
+				    if ($mod!='pluginmanager') // hide plugin manager
+					    $plugins[] = $mod;
+			    }
+
+		    }
+	    }
+
+	    sort($plugins);
+
+	    return $plugins;
 	}
 
     }
