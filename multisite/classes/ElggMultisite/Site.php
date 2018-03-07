@@ -18,6 +18,13 @@ namespace ElggMultisite {
 
 	    if (!is_writable($this->getDataDir()))
 		throw new \Exception ("It doesn't appear that your data directory (".$this->getDataDir ().") is writable.");
+	    
+	    try {
+		if (!DB::db()) 
+		    throw new \Exception("There was a problem connecting to the multisite directory.");
+	    } catch (\Exception $ex) {
+		throw new \Exception("There was a problem connecting to the multisite directory.");
+	    }
 	}
 
 	/**
