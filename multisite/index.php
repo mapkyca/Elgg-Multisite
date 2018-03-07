@@ -35,6 +35,22 @@ register_shutdown_function(function () {
     }
 });
 
+set_exception_handler(function ($exception) {
+    try {
+	ob_clean();
+    } catch (ErrorException $e) {
+
+    }
+
+    http_response_code(500);
+    error_log($e->getMessage());
+    
+    echo "<h1>Elgg Multisite experienced a problem</h1>";
+    echo "<p>Sorry, we experienced a problem with this page and couldn't continue. The technical details are as follows:</p>";
+    echo "<pre>".$e->getMessage()."</pre>";
+
+});
+
 require_once(dirname(dirname(__FILE__)) . '/elgg/elgg-config/settings.php');
 session_start();
 
