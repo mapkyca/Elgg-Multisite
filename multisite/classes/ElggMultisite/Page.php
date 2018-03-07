@@ -15,7 +15,7 @@ namespace ElggMultisite {
 	    exit;
 	}
 	
-	public static function gatekeeper() {
+	public function gatekeeper() {
 	    
 	    if (!User::isLoggedIn())
 		$this->forward ('/');
