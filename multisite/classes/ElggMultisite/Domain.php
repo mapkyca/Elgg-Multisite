@@ -105,8 +105,7 @@ namespace ElggMultisite {
 
 	public function isDbInstalled() {
 	    
-	    if ($result = DB::execute("SHOW tables like {$this->dbname}.:prefix%", [':prefix' => $this->dbprefix])) {
-		print_r($result); die();
+	    if ($result = DB::execute("SHOW tables like '{$this->dbname}.{$this->dbprefix}%'")) {
 		return true;
 	    }
 	    
@@ -175,7 +174,7 @@ namespace ElggMultisite {
 	    if (!$this->id) {
 		$this->id = DB::insert("INSERT into domains (domain, class) VALUES (:url, :class)", [':url' => $url, ':class' => $class]);
 	    } else
-		$result = DB::execute("UPDATE domains set domain=:url, class=:class WHERE id=:id", [':url' => $url, ':class' => $class, ':id' => $this->id]);
+		$result = DB::update("UPDATE domains set domain=:url, class=:class WHERE id=:id", [':url' => $url, ':class' => $class, ':id' => $this->id]);
 
 
 	    DB::delete("DELETE from domains_metadata where domain_id=:domain_id", [':domain_id' => $this->id]);
@@ -331,14 +330,11 @@ namespace ElggMultisite {
 		    $activated = Site::site()->getInstalledPlugins();
 		    foreach ($activated as $plugin)
 		    {
-			Site::site()->setActivatedPlugins($domain_id, $plugin); // Active plugin globally
-			
-			// Activate on the domain
-//			if (in_array($plugin, $plugins)) {
-//			    $domain->toggle_plugin ($plugin);
-//			} else {
-//			    $domain->toggle_plugin($plugin, false);
-//			}
+			if (in_array($plugin, $plugins)) {
+			    Site::site()->setActivatedPlugins($domain_id, $plugin); // Active plugin globally
+			} else {
+			    Site::site()->setActivatedPlugins($domain_id, $plugin, false); // Deactivate plugin globally
+			}
 		    }
 		    
 		}
@@ -352,7 +348,7 @@ namespace ElggMultisite {
 	 * @return \ElggMultisite\Domain
 	 */
 	public static function getByID($id) {
-	    if ($result = DB::execute("SELECT * from domains where id = :id". [':id' => $id])){
+	    if ($result = DB::execute("SELECT * from domains where id = :id", [':id' => $id])){
 		return Router::toObj($result[0]);
 	    }
 	}

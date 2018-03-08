@@ -45,22 +45,19 @@
 					<?php
 				}
 				
-				?>
-				:: <a href="http://////<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a> 
-				<?php
 				
-				/*
+			
 				if ($domain->isDbInstalled()==0)
 				{
 					?>
-					:: <a href="http:////////<?php echo $domain->getDomain(); ?>/install.php" target="_blank">Install</a>
-					//<?php
+					:: <a href="http://<?php echo $domain->getDomain(); ?>/install.php" target="_blank">Install</a>
+					<?php
 				}
 				else
 				{
 					?>
-					:: <a href="http:////////<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a>
-					//<?php
+					:: <a href="http://<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a>
+					<?php
 				}
 				
 				if (($domain->getDBVersion()>0) && ($domain->getDBVersion()<$version))
@@ -69,7 +66,7 @@
 					:: <a href="http://////<?php echo $domain->getDomain(); ?>/upgrade.php" target="_blank">Upgrade DB</a>
 					<?php
 				}
-				*/
+				
 				?>
 			</div>
 		</div>	

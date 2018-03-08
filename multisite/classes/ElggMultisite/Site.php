@@ -92,7 +92,7 @@ namespace ElggMultisite {
 	{
 	    if ($activate)
 	    {
-		DB::insert("INSERT into domains_activated_plugins (domain_id, plugin) VALUES (:domain_id, :plugin)", [':domain_id' => $domain_id, ':plugin' => $plugin]);
+		DB::insert("REPLACE into domains_activated_plugins (domain_id, plugin) VALUES (:domain_id, :plugin)", [':domain_id' => $domain_id, ':plugin' => $plugin]);
 	    }
 	    else
 	    {
