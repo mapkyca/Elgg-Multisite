@@ -26,7 +26,7 @@ $CONFIG->multisite = new stdClass;
 
 /**
  * Configure multisite support here, see
- * ELGGMULTI.txt for details.
+ * README.md for details.
  */
 $CONFIG->multisite->dbuser = 'elggmultisite';
 $CONFIG->multisite->dbpass = 'elggmultisite';
@@ -40,16 +40,16 @@ $CONFIG->multisite->dbname = 'elggmultisite';
  * Currently split databases are not supported.
  */
 $router = new ElggMultisite\Router();
-$db_settings = $router->route();
+if ($db_settings = $router->route()) {
 
-$CONFIG->elgg_multisite_settings = $db_settings; // Make multisite settings available to peeps.
+    $CONFIG->elgg_multisite_settings = $db_settings; // Make multisite settings available to peeps.
 
-$CONFIG->dataroot = $db_settings->dataroot;
-$CONFIG->dbuser = $db_settings->dbuser;
-$CONFIG->dbpass = $db_settings->dbpass;
-$CONFIG->dbname = $db_settings->dbname;
-$CONFIG->dbhost = $db_settings->dbhost;
-$CONFIG->dbprefix = $db_settings->dbprefix;
+    $CONFIG->dataroot = $db_settings->dataroot;
+    $CONFIG->dbuser = $db_settings->dbuser;
+    $CONFIG->dbpass = $db_settings->dbpass;
+    $CONFIG->dbname = $db_settings->dbname;
+    $CONFIG->dbhost = $db_settings->dbhost;
+    $CONFIG->dbprefix = $db_settings->dbprefix;
+    
+}
 
-// URL
-$CONFIG->url = "";

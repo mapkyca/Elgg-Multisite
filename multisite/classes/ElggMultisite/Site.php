@@ -103,6 +103,16 @@ namespace ElggMultisite {
 		    $domain->disable_plugin($plugin);
 	    }
 	}
+	
+	/**
+	 * Override of Elgg's application installer with our own
+	 */
+	public static function install() {
+	    ini_set('display_errors', 1);
+	    $installer = new \ElggMultisite\Elgg\MultisiteInstaller();
+	    $step = get_input('step', 'welcome');
+	    $installer->run($step);
+	}
 
 	/**
 	 * 
