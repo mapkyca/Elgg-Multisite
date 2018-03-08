@@ -2,6 +2,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.ssh.insert_key = false 
+
   config.vm.box = "ubuntu/xenial64"
 
   config.vm.boot_timeout = 600
