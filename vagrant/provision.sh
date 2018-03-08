@@ -20,7 +20,10 @@ echo "Configuring apache..."
 a2enmod rewrite
 cp -f /home/vagrant/vagrant/000-default.conf /etc/apache2/sites-available/
 cp -f /home/vagrant/vagrant/multisite.conf /etc/apache2/sites-available/
-a2ensite phpmyadmin
+
+ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+
+a2enconf phpmyadmin
 a2ensite multisite
 
 echo "Restarting apache..."
