@@ -300,7 +300,7 @@ namespace ElggMultisite {
 			$domain->dbprefix = 'elgg';
 				
 		    $domain->dataroot = dirname(dirname(dirname(dirname(__FILE__)))) . "/data/$url/"; 
-		    @mkdir($domain->dataroot, 0755);
+		    @mkdir($domain->dataroot, 0777);
 
 		    $dbname = $domain->dbname;
 		    $dbuser = $domain->dbuser;
