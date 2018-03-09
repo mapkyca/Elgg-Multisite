@@ -16,10 +16,10 @@
 
 elgg_register_event_handler('init', 'system', function () {
 
-    elgg_register_action('admin/plugins/activate', dirname(__FILE__) . '/actions/enable.php'); // Enable
-    elgg_register_action('admin/plugins/deactivate', dirname(__FILE__) . '/actions/disable.php'); // Disable
-    elgg_register_action('admin/plugins/activate_all', dirname(__FILE__) . '/actions/enable_all.php'); // Enable all
-    elgg_register_action('admin/plugins/deactiveate_all', dirname(__FILE__) . '/actions/disable_all.php'); // Disable all
+    elgg_register_action('admin/plugins/activate', dirname(__FILE__) . '/actions/activate.php'); // Enable
+    elgg_register_action('admin/plugins/deactivate', dirname(__FILE__) . '/actions/deactivate.php'); // Disable
+    elgg_register_action('admin/plugins/activate_all', dirname(__FILE__) . '/actions/activate_all.php'); // Enable all
+    elgg_register_action('admin/plugins/deactiveate_all', dirname(__FILE__) . '/actions/activate_all.php'); // Disable all
 
     elgg_register_action('admin/site/update_advanced', dirname(__FILE__) . 'actions/update_advanced.php'); // Disable all
     //register_action('admin/plugins/set_priority', false, $dirname(__FILE__). '/actions/reorder.php', true); // Reorder
