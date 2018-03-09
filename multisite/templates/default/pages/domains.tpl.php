@@ -8,6 +8,7 @@
 <div class="domains card">
     <div class="card-header">Domains</div>
     <div class="card-body">
+	<div class="list-group">
 <?php
 	
 	if ($domains)
@@ -23,7 +24,7 @@
 //			error_log(var_export($domain, true));
 			try {
 		?>
-		<div class="domain<?php if ($domain->enabled=='no') echo " disabled"; ?><?php if (!$domain->isSiteAccessible()) echo " inaccessible"; ?>">
+		<div class="list-group-item domain<?php if ($domain->enabled=='no') echo " disabled"; ?><?php if (!$domain->isSiteAccessible()) echo " inaccessible"; ?>">
 			<a href="#disp_<?php echo $domain->getID(); ?>" data-toggle="collapse"><b><?php echo $url; ?></b> (<?php echo $label; ?>) </a>
 			<div id="disp_<?php echo $domain->getID(); ?>" class="collapse">
 				<div class="domain_display">
@@ -82,6 +83,7 @@
 		}
 	}
 ?>	
+	</div>
     </div>
 </div>
 <br />
