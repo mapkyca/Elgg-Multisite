@@ -36,6 +36,13 @@ foreach ($installed_plugins as $id => $plugin) {
 	    
 	    continue;
 	}
+	
+	// Hide multisite manager
+	if ($plugin->getID() == 'elggmultisite') {
+	    unset($installed_plugins[$id]);
+	
+	    continue;
+	}
 	    
     
 	if (!$plugin->isValid()) {
