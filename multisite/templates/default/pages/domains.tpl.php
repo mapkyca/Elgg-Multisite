@@ -20,7 +20,7 @@
 			$d = strtolower(get_class($domain));
 			
 			ob_start();
-			
+//			error_log(var_export($domain, true));
 			try {
 		?>
 		<div class="domain<?php if ($domain->enabled=='no') echo " disabled"; ?><?php if (!$domain->isSiteAccessible()) echo " inaccessible"; ?>">
@@ -32,7 +32,7 @@
 			</div>
 			<div class="domain_strap">
 				<a href="/domains/delete?domain_id=<?php echo $domain->getID(); ?>">Delete</a> <?php
-				if ($domain->enabled=='no')
+				if (!$domain->isSiteAccessible())
 				{
 					?>
 					:: <a href="/domains/enable?domain_id=<?php echo $domain->getID(); ?>">Enable</a>
@@ -43,28 +43,29 @@
 					?>
 					:: <a href="/domains/disable?domain_id=<?php echo $domain->getID(); ?>">Disable</a>
 					<?php
-				}
 				
 				
-			
-				if ($domain->isDbInstalled()==0)
-				{
-					?>
-					:: <a href="http://<?php echo $domain->getDomain(); ?>/multisite_install.php" target="_blank">Install</a>
-					<?php
-				}
-				else
-				{
-					?>
-					:: <a href="http://<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a>
-					<?php
-				}
 				
-				if (($domain->getDBVersion()>0) && ($domain->getDBVersion()<$version))
-				{
-					?>
-					:: <a href="http://////<?php echo $domain->getDomain(); ?>/upgrade.php" target="_blank">Upgrade DB</a>
-					<?php
+				
+				    if ($domain->isDbInstalled()==0)
+				    {
+					    ?>
+					    :: <a href="http://<?php echo $domain->getDomain(); ?>/install.php" target="_blank">Install</a>
+					    <?php
+				    }
+				    else
+				    {
+					    ?>
+					    :: <a href="http://<?php echo $domain->getDomain(); ?>" target="_blank">Visit site</a>
+					    <?php
+				    }
+
+				    if (($domain->getDBVersion()>0) && ($domain->getDBVersion()<$version))
+				    {
+					    ?>
+					    :: <a href="http://<?php echo $domain->getDomain(); ?>/upgrade.php" target="_blank">Upgrade DB</a>
+					    <?php
+				    }
 				}
 				
 				?>
@@ -73,7 +74,9 @@
 		<?php
 		    echo ob_get_clean();
 		    } catch (\Exception $e) {
+			
 			ob_get_clean();
+			throw $e;
 		    }
 
 		    

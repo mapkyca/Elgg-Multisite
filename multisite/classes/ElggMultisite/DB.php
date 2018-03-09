@@ -20,7 +20,7 @@ namespace ElggMultisite {
 
 	    return self::$db;
 	}
-
+	
 	public static function create($dbname) {
 
 	    $statement = self::db()->prepare("create database if not exists $dbname");
@@ -67,7 +67,7 @@ namespace ElggMultisite {
 
 	    $statement = self::db()->prepare($query);
 	    if ($statement->execute($values)) {
-		return $statement->rowCount();
+		return self::db()->lastInsertId();
 	    }
 
 	    return false;

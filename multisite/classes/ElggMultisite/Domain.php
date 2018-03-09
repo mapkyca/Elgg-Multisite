@@ -90,6 +90,18 @@ namespace ElggMultisite {
 
 	    return true;
 	}
+	
+	public function disable() {
+	    $this->enabled = 'no';
+	    
+	    return $this->save();
+	}
+	
+	public function enable() {
+	    $this->enabled = 'yes';
+	    
+	    return $this->save();
+	}
 
 	public function setDomain($url) {
 	    $this->domain = $url;
@@ -105,17 +117,22 @@ namespace ElggMultisite {
 
 	public function isDbInstalled() {
 	    
-	    if ($result = DB::execute("SHOW tables like '{$this->dbname}.{$this->dbprefix}%'")) {
-		return true;
+	    if (!empty($this->dbname)) {
+		if ($result = DB::execute("SELECT * from {$this->dbname}.{$this->dbprefix}sites_entity")) {		    
+		    return true;
+		}
 	    }
-	    
 	    return false;
 	}
 
 	public function getDBVersion() {
 	    
-	    if ($result = DB::execute("SELECT * FROM {$this->dbname}.{$this->dbprefix}datalists WHERE name='version'"))
-		return $result[0]->value;
+	    try {
+		if ($result = DB::execute("SELECT * FROM {$this->dbname}.{$this->dbprefix}datalists WHERE name='version'"))
+		    return $result[0]->value;
+	    } catch (\Exception $e) {
+		
+	    }
 
 	    return false;
 	}
@@ -164,6 +181,14 @@ namespace ElggMultisite {
 	    return true;
 	}
 	
+	public function delete() {
+	    
+	    DB::delete("DELETE from domains where id = :id", [':id' => $this->id]);
+	    DB::delete("DELETE from domains_metadata where domain_id=:domain_id", [':domain_id' => $this->id]);
+	    
+	    return true;
+	}
+	
 	/**
 	 * Save object to database.
 	 */
@@ -187,6 +212,7 @@ namespace ElggMultisite {
 
 		// Save metadata
 		foreach ($value as $meta) {
+		    //error_log("Inserting $this->id - $key as $meta");
 		    DB::insert("INSERT into domains_metadata (domain_id, name, value) VALUES (:domain_id, :name, :value)", [':domain_id' => $this->id, ':name' => $key, ':value' => $meta]);
 		}
 	    }
