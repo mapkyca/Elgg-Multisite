@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>Elgg Multisite</name>
+	<id>elggmultisite</id>
+	<author>Marcus Povey</author>
+	<version>2.0</version>
+	<category>bundled</category>
+	<description>Elgg multisite plugin manager</description>
+	<website>https://www.marcus-povey.co.uk</website>
+	<license>GNU General Public License version 2</license>
+	<requires>
+		<type>elgg_release</type>
+		<version>2.0</version>
+	</requires>
+	<activate_on_install>true</activate_on_install>
+</plugin_manifest>
