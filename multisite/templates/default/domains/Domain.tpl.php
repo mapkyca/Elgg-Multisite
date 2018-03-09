@@ -16,7 +16,7 @@ if (!empty($domain))
 	    }
 	    ?>
 	    <div class="form-group">
-		<label>Domain name: <input type="text" class="domain input-text form-control" name="domain" value="<?= (!empty($domain)) ? $domain->getDomain() : ''; ?>" placeholder="yoursite.multi" required /></label>
+		<label>Domain name: <input type="text" class="domain input-text form-control" name="domain" value="<?= (!empty($domain)) ? $domain->getDomain() : ''; ?>" placeholder="yoursite.multi" required <?= (!empty($domain)) ? 'readonly' : '' ?> /></label>
 	    </div>
 
 	    <?= $this->draw('forms/domains/dbsettings'); ?>
