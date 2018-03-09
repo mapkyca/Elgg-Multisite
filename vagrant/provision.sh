@@ -26,6 +26,8 @@ ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 a2enconf phpmyadmin
 a2ensite multisite
 
+usermod -a -G vagrant www-data
+
 echo "Restarting apache..."
 /etc/init.d/apache2 restart
 
