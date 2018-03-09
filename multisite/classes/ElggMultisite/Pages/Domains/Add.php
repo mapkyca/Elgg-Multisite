@@ -21,7 +21,6 @@ namespace ElggMultisite\Pages\Domains {
 		);
 	    } catch (\Exception $e) {
 		\ElggMultisite\Messages::addMessage($e->getMessage());
-		throw $e;
 	    }
 	    
 	    $this->forward('/domains/');
