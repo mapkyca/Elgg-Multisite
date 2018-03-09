@@ -8,6 +8,7 @@
 	<description>Elgg multisite plugin manager</description>
 	<website>https://www.marcus-povey.co.uk</website>
 	<license>GNU General Public License version 2</license>
+	<copyright>(C) Marcus Povey 2018</copyright>
 	<requires>
 		<type>elgg_release</type>
 		<version>2.0</version>
