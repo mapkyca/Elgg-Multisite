@@ -147,6 +147,9 @@ namespace ElggMultisite {
 	
 	protected function toggle_plugin($plugin, $enable = true, $site_id = 1) {
 	    
+	    if ($plugin == 'elggmultisite')
+		return;
+	    
 	    $string = DB::execute("SELECT * FROM {$this->dbname}.{$this->dbprefix}metastrings WHERE string='enabled_plugins'");
 	    if (!$string) {
 		

@@ -15,17 +15,28 @@
 <div class="card">
     <div class="card-header">Available plugins</div>
     <div class="card-body">
-	<div class="list-group">
+	<table class="table">
+	    <thead class="thead-dark">
+		<th scope="col">Plugin</th>
+		<th scope="col">Activate</th>
+	    </thead>
 	<?php
 		foreach ($plugins as $plugin)
 		{
+		    if ($plugin == 'elggmultisite') {
+			?>
+		<input class="form-control" type="hidden" name="available_plugins[]" value="<?php echo $plugin; ?>" />
+	    <?php
+		    } else {
 	?>
-    <div class="form-group list-group-item">
-		<label><input class="form-control" type="checkbox" name="available_plugins[]" value="<?php echo $plugin; ?>" <?php if (in_array($plugin, $activated)) echo 'checked="true"'; ?> /> <?php echo $plugin; ?></label>
-    </div>
+	    <tr>
+		<td><?php echo $plugin; ?></td>
+		<td><input class="form-control" type="checkbox" name="available_plugins[]" value="<?php echo $plugin; ?>" <?php if (in_array($plugin, $activated)) echo 'checked="true"'; ?> /> </td>
+	    </tr>
 	<?php	
+		    }
 		}
 	?>
-	</div>
+	</table>
     </div>
 </div>

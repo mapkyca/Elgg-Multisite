@@ -81,6 +81,10 @@
 
 		    
 		}
+	} else {
+	    ?>
+	    No domains available...
+	    <?php
 	}
 ?>	
 	</div>

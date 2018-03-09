@@ -61,12 +61,16 @@ namespace ElggMultisite {
 	 */
 	function isPluginAvailable($plugin, $domain_id = null)
 	{
-		static $activated;
-		
-		if (!$activated)
-		    $activated = $this->getActivatedPlugins ($domain_id);
-			
-		return in_array($plugin, $activated);
+	    // Elgg multisite plugin is always activated.
+	    if ($plugin == 'elggmultisite')
+		return true;
+
+	    static $activated;
+
+	    if (!$activated)
+		$activated = $this->getActivatedPlugins ($domain_id);
+
+	    return in_array($plugin, $activated);
 	}
 	
 	/**
