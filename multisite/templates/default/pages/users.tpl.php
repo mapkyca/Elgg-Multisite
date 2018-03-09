@@ -15,7 +15,9 @@ $users = \ElggMultisite\User::getUsers();
 		
 		
 		<div id="disp_<?php echo $user->id; ?>" class="collapse">
-			<div class="user_display">
+		    <br />
+		    <div class="card">
+			<div class="user_display card-body">
 				
 				<form action="/session/setpassword" method="POST">
 			
@@ -31,6 +33,7 @@ $users = \ElggMultisite\User::getUsers();
 				
 			
 			</div>
+		    </div>
 		</div>
 		
 		
