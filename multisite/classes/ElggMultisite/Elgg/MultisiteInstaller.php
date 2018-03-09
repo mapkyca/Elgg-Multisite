@@ -37,6 +37,7 @@ namespace ElggMultisite\Elgg {
 		    'type' => 'text',
 		    'value' => $CONFIG->dataroot,
 		    'required' => TRUE,
+		    'readonly' => true
 		),
 		'siteaccess' => array(
 		    'type' => 'access',
