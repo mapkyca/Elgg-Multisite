@@ -54,6 +54,20 @@ namespace ElggMultisite {
 
 	    return $plugins;
 	}
+	/**
+	 * Return whether a plugin is available for a given
+	 *
+	 * @param string $plugin
+	 */
+	function isPluginAvailable($plugin, $domain_id = null)
+	{
+		static $activated;
+		
+		if (!$activated)
+		    $activated = $this->getActivatedPlugins ($domain_id);
+			
+		return in_array($plugin, $activated);
+	}
 	
 	/**
 	 * Get plugins which have been activated for a given domain.
