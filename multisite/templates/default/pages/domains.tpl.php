@@ -76,7 +76,6 @@
 		    } catch (\Exception $e) {
 			
 			ob_get_clean();
-			throw $e;
 		    }
 
 		    
