@@ -55,7 +55,7 @@ If you want to start playing with this quickly, you can run the vagrant build.
 * Go to http://elgg-multisite and set up your first admin user
   * Log in admin
   * Create your whatever.multi domain
-* Visit http://whatever.multi (note: currently vagrant can't set writable dirs automatically, so you might need to go into your ```/data/``` directory and set ```chmod 777``` for your new domain dir.)
+* Visit http://whatever.multi
 
 ## Copyright 
 
