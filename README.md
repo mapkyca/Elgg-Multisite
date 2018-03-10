@@ -47,9 +47,9 @@ If you want an example of how to set it up, take a look at the configuration of 
 If you want to start playing with this quickly, you can run the vagrant build.
 
 * Install vagrant
-* Modify your hosts
-  * Set "elgg-multisite" to point to 192.168.33.35
-  * Set "whatever.multi", "whatever2.multi", etc...
+* Modify your ```hosts``` file (/etc/hosts on linux)
+  * Set "elgg-multisite" to point to the IP in your Vagrantfile (192.168.33.35 by default)
+  * Set "whatever.multi", "whatever2.multi", etc... to point to the same
 * Make sure ```/data/``` is writable by your webserver
 * ```vagrant up```
 * Go to http://elgg-multisite and set up your first admin user
