@@ -8,6 +8,10 @@ namespace ElggMultisite {
 
 	public function __construct() {
 
+	    if (!headers_sent()) {
+		header('X-Powered-By: Elgg Multisite (https://elgg-multisite.com)');
+		header('X-Elgg-Multisite:  v' . Version::version() . '-' . Version::build());
+	    }
 	}
 
 	/**
