@@ -306,11 +306,10 @@ namespace ElggMultisite {
 		    // Common db settings
 		    $domain->dbname = $dbsettings['dbname'];
 		    if (!$domain->dbname) {
-			
-			$url = preg_replace("/[^a-zA-Z0-9\s]/", "_", $url);
-			$domain->dbname= $url;
-			
+			$url = preg_replace("/[^a-zA-Z0-9]/", "_", $url);
+			$domain->dbname= $url;	
 		    }
+		    $domain->dbname = preg_replace("/[^a-zA-Z0-9\_]/", "", $domain->dbname);
 
 		    $domain->dbuser = $dbsettings['dbuser'];
 		    if (!$domain->dbuser)
@@ -327,6 +326,7 @@ namespace ElggMultisite {
 		    $domain->dbprefix = $dbsettings['dbprefix'];
 		    if (!$domain->dbprefix)
 			$domain->dbprefix = 'elgg';
+		    $domain->dbprefix = preg_replace("/[^a-zA-Z0-9\_]/", "", $domain->dbprefix);
 				
 		    $domain->dataroot = dirname(dirname(dirname(dirname(__FILE__)))) . "/data/$url/"; 
 		    @mkdir($domain->dataroot, 0755);
