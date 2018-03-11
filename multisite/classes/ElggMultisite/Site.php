@@ -16,6 +16,10 @@ namespace ElggMultisite {
 
 	public function checkInstall() {
 
+	    if (version_compare(phpversion(), '5.6', '<')) {
+		throw new \Exception ("Sorry, your PHP version is too old. We recommend PHP 7 or above!");
+	    }
+	    
 	    if (!is_writable($this->getDataDir()))
 		throw new \Exception ("It doesn't appear that your data directory (".$this->getDataDir ().") is writable.");
 	    
