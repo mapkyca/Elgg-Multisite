@@ -57,6 +57,8 @@ If you want to start playing with this quickly, you can run the vagrant build.
   * Create your whatever.multi domain
 * Visit http://whatever.multi
 
+Note: Provisioning will destroy any existing management database, so careful if you're reprovisioning an existing box!
+
 ## Copyright 
 
 (C) 2010-18 Marcus Povey All Rights Reserved 
