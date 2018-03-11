@@ -76,6 +76,11 @@ try {
 }
 
 
+\ElggMultisite\PageHandler::hook('404', function ($params = array()) {
+    http_response_code(404);
+    
+    echo "<h1>Elgg Multisite could not find that page, sorry!</h1>";
+});
 \ElggMultisite\PageHandler::serve([
     '/?' => '\ElggMultisite\Pages\LoggedOut',
     'users/?' => '\ElggMultisite\Pages\Users',
