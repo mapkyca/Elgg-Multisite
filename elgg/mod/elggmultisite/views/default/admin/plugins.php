@@ -27,7 +27,7 @@ foreach ($installed_plugins as $id => $plugin) {
 	    // Plugin not enabled, deactivate if activated
 	    if ($plugin->isActive()) {
 		elgg_add_admin_notice('invalid_and_deactivated_' . $plugin->getID(),
-				elgg_echo('ElggPlugin:InvalidAndDeactivated', array($plugin->getId())));
+				elgg_echo('ElggPlugin:InvalidAndDeactivated:multisite', array($plugin->getId())));
 		$plugin->deactivate();
 	    }
 	    
