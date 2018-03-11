@@ -15,7 +15,7 @@ You can do everything that you can do with Elgg, but with the
 ability to create new networks on demand. This will for example 
 let you:
 
-* Set up your own version of Ning!
+* Set up your own version of Ning or Buddypress
 * In your organisation or institution, easily set up Elgg 
   sites for each department.
 * ... etc...
@@ -57,7 +57,7 @@ If you want to start playing with this quickly, you can run the vagrant build.
   * Create your whatever.multi domain
 * Visit http://whatever.multi
 
-Note: Provisioning will destroy any existing management database, so careful if you're reprovisioning an existing box!
+Note: Provisioning will destroy any existing management database, so careful if you're re-provisioning an existing box!
 
 ## Copyright 
 
