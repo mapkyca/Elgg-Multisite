@@ -1,2 +1,2 @@
 
-<script src="/js/default.js"></script>
+<script src="/js/multisite.js"></script>

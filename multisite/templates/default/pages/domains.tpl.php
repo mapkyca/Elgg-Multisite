@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="domain_strap">
-				<a href="/domains/delete?domain_id=<?php echo $domain->getID(); ?>">Delete</a> <?php
+				<a class="confirmlink" data-confirmtext="Are you sure you want to delete this site? This can not be undone!" href="/domains/delete?domain_id=<?php echo $domain->getID(); ?>">Delete</a> <?php
 				if (!$domain->isSiteAccessible())
 				{
 					?>
@@ -42,7 +42,7 @@
 				else
 				{
 					?>
-					:: <a href="/domains/disable?domain_id=<?php echo $domain->getID(); ?>">Disable</a>
+					:: <a class="confirmlink" href="/domains/disable?domain_id=<?php echo $domain->getID(); ?>">Disable</a>
 					<?php
 				
 				
