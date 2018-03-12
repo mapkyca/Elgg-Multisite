@@ -8,7 +8,7 @@ namespace ElggMultisite {
 
 	public function __construct() {
 
-	    if (!headers_sent()) {
+	    if (!headers_sent() && !defined('ELGG-MULTISITE-CONSOLE')) {
 		header('X-Powered-By: Elgg Multisite (https://elgg-multisite.com)');
 		header('X-Elgg-Multisite:  v' . Version::version() . '-' . Version::build());
 	    }
@@ -21,9 +21,14 @@ namespace ElggMultisite {
 	 */
 	public function route($url = "") {
 
-	    if (empty($url))
-		$url = $_SERVER['SERVER_NAME'];
+	    if (!defined('ELGG-MULTISITE-CONSOLE')) {
+		if (empty($url))
+		    $url = $_SERVER['SERVER_NAME'];
+	    }
 
+	    if (empty($url))
+		return false;
+	    
 	    if ($row = DB::execute("select * from domains where domain = :url limit 1", [':url' => $url])) {
 		if ($obj = static::toObj($row[0])) {
 		    if (!$obj->isSiteAccessible())
