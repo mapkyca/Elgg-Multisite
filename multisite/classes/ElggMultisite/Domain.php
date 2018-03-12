@@ -381,6 +381,17 @@ namespace ElggMultisite {
 		return Router::toObj($result[0]);
 	    }
 	}
+	
+	/**
+	 * Get a domain by it's domain.
+	 * @param type $domain
+	 * @return Domain
+	 */
+	public static function getByDomain($domain) {
+	    if ($result = DB::execute("SELECT * from domains where domain = :domain", [':domain' => $domain])){
+		return Router::toObj($result[0]);
+	    }
+	}
 
     }
 
