@@ -21,6 +21,9 @@ if (!empty($domain))
 
 	    <?= $this->draw('forms/domains/dbsettings'); ?>
 	    <?= $this->draw('forms/domains/plugins'); ?>
+	    <?= $this->__([
+		'action' => $form
+	    ])->draw('forms/token'); ?>
 
 	    <input type="hidden" name="class" value="ElggMultisite\Domain" />
 	    <input type="submit" name="Submit" value="Submit" />

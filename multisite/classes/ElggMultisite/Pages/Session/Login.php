@@ -10,6 +10,8 @@ namespace ElggMultisite\Pages\Session {
 
 	public function post() {
 	    
+	    $this->tokenGatekeeper('/session/login');
+	    
 	    $username = \ElggMultisite\Input::getInput('username');
 	    $password = \ElggMultisite\Input::getInput('password');
 	    

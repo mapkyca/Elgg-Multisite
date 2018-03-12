@@ -11,6 +11,7 @@ namespace ElggMultisite\Pages\Domains {
 
 	public function post() {
 	    $this->gatekeeper();
+	    $this->tokenGatekeeper(\ElggMultisite\Input::getInput('__bTa'));
 	    
 	    try {
 		\ElggMultisite\Domain::addDomain(

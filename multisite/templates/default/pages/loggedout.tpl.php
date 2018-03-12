@@ -12,7 +12,9 @@
 	    <label>Password: <input class="password input-password form-control" type="password" name="password" value="" /> </label>
 	</div>
 
-
+	<?= $this->__([
+	    'action' => '/session/login'
+	])->draw('forms/token'); ?>
 	<input class="submit" type="submit" name="Login" value="Login">
     </form>
 

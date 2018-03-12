@@ -6,6 +6,12 @@ namespace ElggMultisite {
 
 	private static $site;
 
+	public function __construct() {
+	    
+	    // Set site secret
+	    \Bonita\Main::siteSecret(__FILE__ . Version::build()); // Set a site secret (quick and dirty for now)
+	}
+	
 	public function getDataDir() {
 	    return dirname(dirname(dirname(dirname(__FILE__)))) . "/data/";
 	}

@@ -22,5 +22,9 @@ namespace ElggMultisite {
 	    
 	    return true;
 	}
+	
+	public function tokenGatekeeper($action) {
+	    \Bonita\Forms::validateToken($action, true);
+	}
     }
 }
