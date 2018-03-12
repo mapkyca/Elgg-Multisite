@@ -61,7 +61,7 @@ If you want to start playing with this quickly, you can run the vagrant build.
   * Set "whatever.multi", "whatever2.multi", etc... to point to the same
 * Make sure ```/data/``` is writable by your webserver
 * ```vagrant up```
-* Go to http://elgg-multisite and set up your first admin user
+* Go to http://elgg-multisite and set up your admin user
   * Log in admin
   * Create your whatever.multi domain
 * Visit http://whatever.multi
