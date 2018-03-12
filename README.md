@@ -59,11 +59,18 @@ If you want to start playing with this quickly, you can run the vagrant build.
 
 Note: Provisioning will destroy any existing management database, so careful if you're re-provisioning an existing box!
 
-## Copyright 
+## Licence and Copyright 
 
-(C) 2010-18 Marcus Povey All Rights Reserved 
+Elgg Multisite is (C) 2010-18 Marcus Povey All Rights Reserved 
     <https://www.marcus-povey.co.uk>
 
-## Licence
-
 Released under GPLv2 (See LICENCE.txt)
+
+### Elgg Multisite includes
+
+* Elgg, distributed under the GPL v2. http://elgg.org
+* Bootstrap, distributed under the MIT licence. https://getbootstrap.com)
+* jQuery, distributed under the MIT Licence. https://github.com/jquery/jquery
+* ToroPHP, distributed under the MIT Licence. https://github.com/anandkunal/ToroPHP/
+* Bonita, distributed under the Apache 2 Licence. https://github.com/benwerd/bonita
+* H5f HTML5 Form shim, distributed under the MIT License. https://github.com/ryanseddon/H5F
