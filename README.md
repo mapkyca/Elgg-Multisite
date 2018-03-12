@@ -74,3 +74,5 @@ Released under GPLv2 (See LICENCE.txt)
 * ToroPHP, distributed under the MIT Licence. https://github.com/anandkunal/ToroPHP/
 * Bonita, distributed under the Apache 2 Licence. https://github.com/benwerd/bonita
 * H5f HTML5 Form shim, distributed under the MIT License. https://github.com/ryanseddon/H5F
+* Portions of Symfony, which is distributed under the MIT license.
+  * Console application. https://github.com/symfony/Console
