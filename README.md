@@ -41,6 +41,15 @@ If you want an example of how to set it up, take a look at the configuration of 
 * Make sure ```/data/``` is writable by your webserver
 * Visit your private domain & set up your first user and user domains
 
+### Console tool
+
+You can also perform basic domain management from the console tool. Log on to your server and use:
+
+```
+./ms
+```
+
+To see a list of commands you can execute.
 
 ## Vagrant build
 
