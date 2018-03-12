@@ -19,7 +19,8 @@ namespace ElggMultisite {
 	}
 
 	public function __get($name) {
-	    return $this->attributes[$name];
+	    if (isset($this->attributes[$name]))
+		return $this->attributes[$name];
 	}
 
 	public function __set($name, $value) {
@@ -279,7 +280,7 @@ namespace ElggMultisite {
 	 */
 	public static function getDomainTypes() {
 	    return [
-		'Domain' => 'Elgg domain',
+		'ElggMultisite\\Domain' => 'Elgg domain',
 	    ];
 	}
 	
