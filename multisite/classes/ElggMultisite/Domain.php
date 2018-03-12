@@ -289,7 +289,7 @@ namespace ElggMultisite {
 	    
 	    global $CONFIG;
 	    
-	    if (User::isLoggedIn()) {
+	    //if (User::isLoggedIn()) {
 		$domain = false;
 			
 		switch ($class)
@@ -305,26 +305,31 @@ namespace ElggMultisite {
 		    $domain->setDomain($url);
 
 		    // Common db settings
-		    $domain->dbname = $dbsettings['dbname'];
+		    if (!empty($dbsettings['dbname']))
+			$domain->dbname = $dbsettings['dbname'];
 		    if (!$domain->dbname) {
 			$url = preg_replace("/[^a-zA-Z0-9]/", "_", $url);
 			$domain->dbname= $url;	
 		    }
 		    $domain->dbname = preg_replace("/[^a-zA-Z0-9\_]/", "", $domain->dbname);
 
-		    $domain->dbuser = $dbsettings['dbuser'];
+		    if (!empty($dbsettings['dbuser']))
+			$domain->dbuser = $dbsettings['dbuser'];
 		    if (!$domain->dbuser)
 			$domain->dbuser=$CONFIG->multisite->dbuser;
 					
-		    $domain->dbpass = $dbsettings['dbpass'];
+		    if (!empty($dbsettings['dbpass']))
+			$domain->dbpass = $dbsettings['dbpass'];
 		    if (!$domain->dbpass)
 			$domain->dbpass=$CONFIG->multisite->dbpass;
 					
-		    $domain->dbhost = $dbsettings['dbhost'];
+		    if (!empty($dbsettings['dbhost']))
+			$domain->dbhost = $dbsettings['dbhost'];
 		    if (!$domain->dbhost)
 			$domain->dbhost=$CONFIG->multisite->dbhost;
 					
-		    $domain->dbprefix = $dbsettings['dbprefix'];
+		    if (!empty($dbsettings['dbprefix']))
+			$domain->dbprefix = $dbsettings['dbprefix'];
 		    if (!$domain->dbprefix)
 			$domain->dbprefix = 'elgg';
 		    $domain->dbprefix = preg_replace("/[^a-zA-Z0-9\_]/", "", $domain->dbprefix);
@@ -368,7 +373,7 @@ namespace ElggMultisite {
 		    }
 		    
 		}
-	    }
+	    //}
 	    
 	}
 	
