@@ -26,7 +26,7 @@ spl_autoload_register(function($class) {
 
 // Create new console application
 global $console;
-$console = new \Symfony\Component\Console\Application();
+$console = new \Symfony\Component\Console\Application('Elgg Multisite', \ElggMultisite\Version::version());
 
 /**
  * Display version
