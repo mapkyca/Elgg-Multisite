@@ -13,13 +13,13 @@ apt-get install -y --force-yes gcc g++ make
 if ! [ -L /var/www ]; then
   rm -rf /var/www
   mkdir -p /var/www
-  ln -fs /home/vagrant/ /var/www/html
+  ln -fs /home/vagrant/multisite/ /var/www/html
 fi
 
 echo "Configuring apache..."
 a2enmod rewrite
-cp -f /home/vagrant/vagrant/000-default.conf /etc/apache2/sites-available/
-cp -f /home/vagrant/vagrant/multisite.conf /etc/apache2/sites-available/
+cp -f /home/vagrant/multisite/vagrant/000-default.conf /etc/apache2/sites-available/
+cp -f /home/vagrant/multisite/vagrant/multisite.conf /etc/apache2/sites-available/
 
 ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 
@@ -42,4 +42,4 @@ echo "grant all privileges on * . * to  'elggmultisite'@'%' with grant option;" 
 echo "flush privileges;" | mysql -u root 
 #echo "grant all on elggmultisite.* to elggmultisite@localhost identified by 'elggmultisite' with grant option;" | mysql -u root 
 #echo "grant all on elggmultisite.* to elggmultisite@'%' identified by 'elggmultisite' with grant option;" | mysql -u root 
-cat /home/vagrant/multisite/schema/multisite_mysql.sql | mysql -u root elggmultisite
+cat /home/vagrant/multisite/multisite/schema/multisite_mysql.sql | mysql -u root elggmultisite

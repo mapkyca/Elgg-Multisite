@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "elgg-multisite"
   config.vm.network :private_network, ip: "192.168.33.35"
 
-  config.vm.synced_folder ".", "/home/vagrant/", :mount_options => ['dmode=774','fmode=775']
+  config.vm.synced_folder ".", "/home/vagrant/multisite/", :mount_options => ['dmode=774','fmode=775']
 
   config.vm.provision :shell, path: "vagrant/provision.sh"
 
