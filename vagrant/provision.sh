@@ -43,3 +43,7 @@ echo "flush privileges;" | mysql -u root
 #echo "grant all on elggmultisite.* to elggmultisite@localhost identified by 'elggmultisite' with grant option;" | mysql -u root 
 #echo "grant all on elggmultisite.* to elggmultisite@'%' identified by 'elggmultisite' with grant option;" | mysql -u root 
 cat /home/vagrant/multisite/multisite/schema/multisite_mysql.sql | mysql -u root elggmultisite
+echo "If you saw some errors about dropping databases or users, things probably went fine."
+
+echo " "
+echo "Multisite provisioned, visit http://elgg-multisite/ to start!"
