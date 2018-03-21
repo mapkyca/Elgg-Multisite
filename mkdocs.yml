@@ -1,0 +1,9 @@
+site_name: Elgg Multisite Documentation
+theme: readthedocs
+markdown_extensions:
+ - admonition
+pages:
+- ['index.md', 'Elgg Multisite Documentation']
+- ['install/index.md', 'Installing and upgrading Elgg Multisite', 'Introduction']
+- ['install/instructions.md', 'Installing and upgrading Elgg Multisite', 'Installation instructions']
+- ['install/requirements.md', 'Installing and upgrading Elgg Multisite', 'System requirements']
