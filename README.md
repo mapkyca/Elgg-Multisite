@@ -46,7 +46,7 @@ If you want an example of how to set it up, take a look at the configuration of 
 You can also perform basic domain management from the console tool. Log on to your server and use:
 
 ```
-./ms
+./ms.php
 ```
 
 To see a list of commands you can execute.
