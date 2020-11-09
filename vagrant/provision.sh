@@ -5,7 +5,10 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get clean
 apt-get update
 dpkg --configure -a
-apt-get install -y --force-yes apache2 php7.0 php7.0-curl php7.0-cli php7.0-gd php7.0-mysql libapache2-mod-php7.0 php7.0-pdo-mysql php7.0-xmlrpc php7.0-mbstring php7.0-dom php7.0-exif php7.0-simplexml
+apt-get install -y --force-yes software-properties-common
+add-apt-repository -y ppa:ondrej/php
+apt-get update
+apt-get install -y --force-yes apache2 php7.4 php7.4-curl php7.4-cli php7.4-gd php7.4-mysql libapache2-mod-php7.4 php7.4-pdo-mysql php7.4-xmlrpc php7.4-mbstring php7.4-dom php7.4-exif php7.4-simplexml
 apt-get install -y --force-yes mariadb-server mariadb-client  screen
 apt-get install -y --force-yes phpmyadmin
 apt-get install -y --force-yes gcc g++ make
