@@ -13,6 +13,7 @@
  */
 
 
+require_once(dirname(__FILE__) . '/../../../multisite/vendor/bonita/start.php');
 
 elgg_register_event_handler('init', 'system', function () {
 
